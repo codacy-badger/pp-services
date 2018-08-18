@@ -1,1 +1,1 @@
-web: java -Dserver.port=%PORT% -jar .\target\pp-services-0.0.1-SNAPSHOT.jar
+web: java -Dserver.port=%PORT% -jar .\target\pp-services.jar --spring.profiles.active=%ACTIVATED_PROFILE%

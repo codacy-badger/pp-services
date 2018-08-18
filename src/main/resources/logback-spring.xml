@@ -2,8 +2,12 @@
 <configuration>
 	<include
 		resource="org/springframework/boot/logging/logback/base.xml" />
-	<springProfile name="local,develop">
+	<springProfile name="local, devl">
 		<logger name="br.com.passeio-pago" level="DEBUG"
+			additivity="false">
+			<appender-ref ref="CONSOLE" />
+		</logger>
+		<logger name="br.com.passeio-pago" level="WARN"
 			additivity="false">
 			<appender-ref ref="CONSOLE" />
 		</logger>
@@ -11,12 +15,18 @@
 			additivity="false">
 			<appender-ref ref="CONSOLE" />
 		</logger>
-	</springProfile>
-	<springProfile name="prod">
-		<logger name="br.com.passeio-pago" level="INFO" additivity="false">
+		<logger name="br.com.passeio-pago" level="ERROR"
+			additivity="false">
 			<appender-ref ref="CONSOLE" />
 		</logger>
-		<logger name="br.com.passeio-pago" level="WARN" additivity="false">
+	</springProfile>
+	<springProfile name="prod">
+		<logger name="br.com.passeio-pago" level="INFO"
+			additivity="false">
+			<appender-ref ref="CONSOLE" />
+		</logger>
+		<logger name="br.com.passeio-pago" level="ERROR"
+			additivity="false">
 			<appender-ref ref="CONSOLE" />
 		</logger>
 	</springProfile>
