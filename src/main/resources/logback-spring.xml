@@ -2,7 +2,7 @@
 <configuration>
 	<include
 		resource="org/springframework/boot/logging/logback/base.xml" />
-	<springProfile name="local, devl">
+	<springProfile name="local, staging">
 		<logger name="br.com.passeio-pago" level="DEBUG"
 			additivity="false">
 			<appender-ref ref="CONSOLE" />
@@ -20,7 +20,7 @@
 			<appender-ref ref="CONSOLE" />
 		</logger>
 	</springProfile>
-	<springProfile name="prod">
+	<springProfile name="production">
 		<logger name="br.com.passeio-pago" level="INFO"
 			additivity="false">
 			<appender-ref ref="CONSOLE" />

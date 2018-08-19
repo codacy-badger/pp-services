@@ -1,8 +1,7 @@
 package br.com.passeio_pago;
 
-import java.net.URISyntaxException;
-
 import org.apache.commons.dbcp2.BasicDataSource;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -20,16 +19,21 @@ public class PasseioPagoServiceApplication {
 	}
 
 	@Bean
-	@Profile(value = { "devl", "prod" })
-	public BasicDataSource dataSource() throws URISyntaxException {
+	@Profile(value = { "staging", "production" })
+	public BasicDataSource dataSource() {
+		String dbUrl = System.getenv("SPRING_DATASOURCE_URL");
+		String dbUserName = System.getenv("SPRING_DATASOURCE_USERNAME");
+		String dbPassword = System.getenv("SPRING_DATASOURCE_PASSWORD");
 		BasicDataSource basicDataSource = new BasicDataSource();
-		basicDataSource.setUrl(System.getenv("SPRING_DATASOURCE_URL"));
-		basicDataSource.setUsername(System.getenv("SPRING_DATASOURCE_USERNAME"));
-		basicDataSource.setPassword(System.getenv("SPRING_DATASOURCE_PASSWORD"));
-		logger.debug("\n\ndebug");
-		logger.info("\n\ninfo");
-		logger.error("\n\nerror");
-		logger.warn("\n\nwarn");
+		basicDataSource.setUrl(dbUrl);
+		basicDataSource.setUsername(dbUserName);
+		basicDataSource.setPassword(dbPassword);
+		if (logger.isDebugEnabled()) {
+			logger.debug("dbUrl=" + dbUrl);
+			logger.debug("dbUserName=" + dbUserName);
+			logger.debug("dbPassword=" + dbPassword);
+			logger.debug("dataSource=" + ToStringBuilder.reflectionToString(basicDataSource));
+		}
 		return basicDataSource;
 	}
 }
