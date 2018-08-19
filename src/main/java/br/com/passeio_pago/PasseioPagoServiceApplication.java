@@ -52,13 +52,13 @@ public class PasseioPagoServiceApplication {
 		return localeResolver;
 	}
 
-//	@Bean
-//	public ResourceBundleMessageSource messageSource() {
-//		ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-//		messageSource.setBasename("i18n/messages");
-//		if (logger.isDebugEnabled()) {
-//			logger.debug("messageSource=" + ToStringBuilder.reflectionToString(messageSource));
-//		}
-//		return messageSource;
-//	}
+	@Bean
+	public ResourceBundleMessageSource messageSource() {
+		ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+		messageSource.setBasename("i18n/messages");
+		if (logger.isDebugEnabled()) {
+			logger.debug("messageSource=" + ToStringBuilder.reflectionToString(messageSource));
+		}
+		return messageSource;
+	}
 }
