@@ -9,6 +9,15 @@
     },
     "PAPERTRAIL_API_TOKEN": {
       "required": true
+    },
+    "SPRING_DATASOURCE_URL": {
+      "required": true
+    },
+    "SPRING_DATASOURCE_USERNAME": {
+      "required": true
+    },
+    "SPRING_DATASOURCE_PASSWORD": {
+      "required": true
     }
   },
   "formation": {
