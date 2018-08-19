@@ -1,5 +1,7 @@
 package br.com.passeio_pago;
 
+import java.util.Locale;
+
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.slf4j.Logger;
@@ -8,6 +10,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Profile;
+import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver;
 
 @SpringBootApplication
 public class PasseioPagoServiceApplication {
@@ -35,5 +40,25 @@ public class PasseioPagoServiceApplication {
 			logger.debug("dataSource=" + ToStringBuilder.reflectionToString(basicDataSource));
 		}
 		return basicDataSource;
+	}
+	
+	@Bean
+	public LocaleResolver localeResolver() {
+		AcceptHeaderLocaleResolver localeResolver = new AcceptHeaderLocaleResolver();
+		localeResolver.setDefaultLocale(new Locale("pt", "BR"));
+		if (logger.isDebugEnabled()) {
+			logger.debug("localeResolver=" + ToStringBuilder.reflectionToString(localeResolver));
+		}
+		return localeResolver;
+	}
+
+	@Bean
+	public ResourceBundleMessageSource messageSource() {
+		ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+		messageSource.setBasename("i18n/messages");
+		if (logger.isDebugEnabled()) {
+			logger.debug("messageSource=" + ToStringBuilder.reflectionToString(messageSource));
+		}
+		return messageSource;
 	}
 }
