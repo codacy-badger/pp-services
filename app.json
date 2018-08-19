@@ -10,6 +10,9 @@
     "PAPERTRAIL_API_TOKEN": {
       "required": true
     },
+    "DATABASE_URL": {
+      "required": true
+    },
     "SPRING_DATASOURCE_URL": {
       "required": true
     },
