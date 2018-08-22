@@ -23,7 +23,7 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
- * @author T708774
+ * @author danilo-moreira
  *
  */
 @Configuration
@@ -60,6 +60,11 @@ public class SwaggerConfig extends WebMvcConfigurationSupport {
 
 	@Override
 	protected void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
+		registry
+			.addResourceHandler("swagger-ui.html")
+			.addResourceLocations("classpath:/META-INF/resources/");
+		registry
+			.addResourceHandler("/webjars/**")
+			.addResourceLocations("classpath:/META-INF/resources/webjars/");
 	}
 }

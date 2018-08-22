@@ -14,6 +14,10 @@ import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver;
 
+/**
+ * @author danilo-moreira
+ *
+ */
 @SpringBootApplication
 public class PasseioPagoServiceApplication {
 
@@ -29,19 +33,21 @@ public class PasseioPagoServiceApplication {
 		String dbUrl = System.getenv("SPRING_DATASOURCE_URL");
 		String dbUserName = System.getenv("SPRING_DATASOURCE_USERNAME");
 		String dbPassword = System.getenv("SPRING_DATASOURCE_PASSWORD");
+			logger.info("dbUrl=" + dbUrl);
+			logger.info("dbUserName=" + dbUserName);
+			logger.info("dbPassword=" + dbPassword);
 		BasicDataSource basicDataSource = new BasicDataSource();
 		basicDataSource.setUrl(dbUrl);
 		basicDataSource.setUsername(dbUserName);
 		basicDataSource.setPassword(dbPassword);
-		if (logger.isDebugEnabled()) {
-			logger.debug("dbUrl=" + dbUrl);
-			logger.debug("dbUserName=" + dbUserName);
-			logger.debug("dbPassword=" + dbPassword);
-			logger.debug("dataSource=" + ToStringBuilder.reflectionToString(basicDataSource));
-		}
+		basicDataSource.setInitialSize(10);
+		basicDataSource.setMinIdle(5);
+		basicDataSource.setMaxTotal(20);
+		basicDataSource.setPoolPreparedStatements(true);
+		basicDataSource.setDriverClassName("org.postgresql.Driver");
 		return basicDataSource;
 	}
-	
+
 	@Bean
 	public LocaleResolver localeResolver() {
 		AcceptHeaderLocaleResolver localeResolver = new AcceptHeaderLocaleResolver();
