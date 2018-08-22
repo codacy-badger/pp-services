@@ -46,8 +46,8 @@ public class UserController {
 
 	@ApiOperation(value = "Registers a new user.", tags = "users")
 	@PostMapping(path = "/register")
-	public UserRegistrationResponseDto<UserPrivate> registerUser(@RequestBody @Valid UserRegistrationDto userRegistrationDto) throws UserRegistrationException {
-		logger.debug(ToStringBuilder.reflectionToString(userRegistrationDto));
+	public UserRegistrationResponseDto<UserPrivate> registerUser(@RequestBody @Valid UserRegistrationDto userRegistrationDto) throws UserRegistrationException, UserNotFoundException {
+		logger.info(ToStringBuilder.reflectionToString(userRegistrationDto));
 		return userService.registerUser(userRegistrationDto);
 	}
 

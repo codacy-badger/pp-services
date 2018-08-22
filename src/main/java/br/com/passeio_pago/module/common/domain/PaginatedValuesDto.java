@@ -5,50 +5,57 @@ import java.util.Collection;
 
 /**
  * Common class which can be used to return a paginated list of values.
- * @param <T> The class to be returned, it should be a Dto class.
+ * 
+ * @param <T>
+ *            The class to be returned, it should be a Dto class.
  */
 public class PaginatedValuesDto<T> implements Serializable {
-  private Collection<T> values;
-  private int pageNum;
-  private int pageSize;
-  private boolean hasMore;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4781519379657557326L;
 
-  public PaginatedValuesDto() {
-    // Intentionally empty.
-  }
+	private Collection<T> values;
+	private int pageNum;
+	private int pageSize;
+	private boolean hasMore;
 
-  public PaginatedValuesDto(Collection<T> values, int pageNum, int maxResults, boolean hasMore) {
-    this.values = values;
-    this.pageNum = pageNum;
-    this.pageSize = maxResults;
-    this.hasMore = hasMore;
-  }
+	public PaginatedValuesDto() {
+		// Intentionally empty.
+	}
 
-  public int getPageNum() {
-    return pageNum;
-  }
+	public PaginatedValuesDto(Collection<T> values, int pageNum, int maxResults, boolean hasMore) {
+		this.values = values;
+		this.pageNum = pageNum;
+		this.pageSize = maxResults;
+		this.hasMore = hasMore;
+	}
 
-  public int getPageSize() {
-    return pageSize;
-  }
+	public int getPageNum() {
+		return pageNum;
+	}
 
-  public boolean isHasMore() {
-    return hasMore;
-  }
+	public int getPageSize() {
+		return pageSize;
+	}
 
-  public void setHasMore(boolean hasMore) {
-    this.hasMore = hasMore;
-  }
+	public boolean isHasMore() {
+		return hasMore;
+	}
 
-  public void setPageNum(int pageNum) {
-    this.pageNum = pageNum;
-  }
+	public void setHasMore(boolean hasMore) {
+		this.hasMore = hasMore;
+	}
 
-  public void setPageSize(int pageSize) {
-    this.pageSize = pageSize;
-  }
+	public void setPageNum(int pageNum) {
+		this.pageNum = pageNum;
+	}
 
-  public Collection<T> getValues() {
-    return values;
-  }
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
+	}
+
+	public Collection<T> getValues() {
+		return values;
+	}
 }

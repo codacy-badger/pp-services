@@ -45,16 +45,16 @@ public class UserServiceImpl implements UserService {
 	public UserRegistrationResponseDto<UserPrivate> registerUser(UserRegistrationDto userRegistrationDto) throws UserRegistrationException {
 		try {
 			validateUserRegistration(userRegistrationDto);
-			UserEntity userEntity = new UserEntity();
-			BeanUtils.copyProperties(userRegistrationDto, userEntity);
-			UserPrivate userPrivate = userDao.createUser(userEntity);
-			UserRegistrationResponseDto<UserPrivate> response = new UserRegistrationResponseDto<UserPrivate>(userPrivate);
-			logger.debug(ToStringBuilder.reflectionToString(response));
-			return response;
 		} catch (Exception e) {
-			logger.debug("Error registering user.", e);
+			logger.info("Error registering user.", e);
 			throw new UserRegistrationException(e.getMessage(), e);
 		}
+		UserEntity userEntity = new UserEntity();
+		BeanUtils.copyProperties(userRegistrationDto, userEntity);
+		UserPrivate userPrivate = userDao.createUser(userEntity);
+		UserRegistrationResponseDto<UserPrivate> response = new UserRegistrationResponseDto<UserPrivate>(userPrivate);
+		logger.info(ToStringBuilder.reflectionToString(response));
+		return response;
 	}
 
 	@Override

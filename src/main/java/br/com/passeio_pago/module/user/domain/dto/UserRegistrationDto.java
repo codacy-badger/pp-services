@@ -13,23 +13,23 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel
 public class UserRegistrationDto {
 
-	@ApiModelProperty(required = true)
+	@ApiModelProperty(required = true, example = "Renan Lima")
 	private String fullName;
 
 	@ApiModelProperty(required = true, example = "foo@email.com")
 	@Email(message = "login must be a valid e-mail.")
 	private String login;
 
-	@ApiModelProperty(required = true)
+	@ApiModelProperty(required = true, example = "renan123")
 	private String password;
 
-	@ApiModelProperty(required = true)
+	@ApiModelProperty(required = true, example = "renan123")
 	private String repeatedPassword;
 
-	@ApiModelProperty(required = false)
+	@ApiModelProperty(required = false, example = "foo@email.com|chill@email.com|lofi@email.com")
 	private String emails;
 
-	@ApiModelProperty(required = false)
+	@ApiModelProperty(required = false, example = "1141000172|1141684381")
 	private String phones;
 
 	@ApiModelProperty(required = true, example = "1(teacher), 2(parent), 3(both)")

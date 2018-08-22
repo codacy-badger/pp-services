@@ -33,9 +33,12 @@ public class PasseioPagoServiceApplication {
 		String dbUrl = System.getenv("SPRING_DATASOURCE_URL");
 		String dbUserName = System.getenv("SPRING_DATASOURCE_USERNAME");
 		String dbPassword = System.getenv("SPRING_DATASOURCE_PASSWORD");
-			logger.info("dbUrl=" + dbUrl);
-			logger.info("dbUserName=" + dbUserName);
-			logger.info("dbPassword=" + dbPassword);
+//		String dbUrl = "jdbc:postgresql://ec2-54-227-241-179.compute-1.amazonaws.com:5432/d2lk8gpddt3v7b?user=esshzfycbmekyv&password=7d9d8e56cd6f662d7cced8fb6af64856c4560b43a290ab8a485ab28b52f0b437&sslmode=require";
+//		String dbUserName = "esshzfycbmekyv";
+//		String dbPassword = "7d9d8e56cd6f662d7cced8fb6af64856c4560b43a290ab8a485ab28b52f0b437";
+		logger.info("dbUrl=" + dbUrl);
+		logger.info("dbUserName=" + dbUserName);
+		logger.info("dbPassword=" + dbPassword);
 		BasicDataSource basicDataSource = new BasicDataSource();
 		basicDataSource.setUrl(dbUrl);
 		basicDataSource.setUsername(dbUserName);
@@ -52,9 +55,7 @@ public class PasseioPagoServiceApplication {
 	public LocaleResolver localeResolver() {
 		AcceptHeaderLocaleResolver localeResolver = new AcceptHeaderLocaleResolver();
 		localeResolver.setDefaultLocale(new Locale("pt", "BR"));
-		if (logger.isDebugEnabled()) {
-			logger.debug("localeResolver=" + ToStringBuilder.reflectionToString(localeResolver));
-		}
+		logger.info("localeResolver=" + ToStringBuilder.reflectionToString(localeResolver));
 		return localeResolver;
 	}
 
@@ -62,9 +63,7 @@ public class PasseioPagoServiceApplication {
 	public ResourceBundleMessageSource messageSource() {
 		ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
 		messageSource.setBasename("i18n/messages");
-		if (logger.isDebugEnabled()) {
-			logger.debug("messageSource=" + ToStringBuilder.reflectionToString(messageSource));
-		}
+		logger.info("messageSource=" + ToStringBuilder.reflectionToString(messageSource));
 		return messageSource;
 	}
 }

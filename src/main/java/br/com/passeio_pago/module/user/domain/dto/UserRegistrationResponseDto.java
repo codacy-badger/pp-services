@@ -1,22 +1,25 @@
 package br.com.passeio_pago.module.user.domain.dto;
 
-import br.com.passeio_pago.module.common.domain.SingleValueDto;
 import io.swagger.annotations.ApiModel;
 
 /**
  * Response from the registration form.
  */
 @ApiModel
-public class UserRegistrationResponseDto<T> extends SingleValueDto<T> {
+public class UserRegistrationResponseDto<T> {
+
+	private T user;
 
 	public UserRegistrationResponseDto() {
-		super();
-		// TODO Auto-generated constructor stub
+		// Intentionally empty.
 	}
 
-	public UserRegistrationResponseDto(T value) {
-		super(value);
-		// TODO Auto-generated constructor stub
+	public UserRegistrationResponseDto(T user) {
+		this.user = user;
+	}
+
+	public T getUser() {
+		return user;
 	}
 
 }

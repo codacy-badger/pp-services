@@ -9,6 +9,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  */
 @ResponseStatus(value = HttpStatus.BAD_REQUEST)
 public class UserRegistrationException extends BadRequestException {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5771911480098129381L;
+
 	public UserRegistrationException(String message) {
 		super(message);
 	}

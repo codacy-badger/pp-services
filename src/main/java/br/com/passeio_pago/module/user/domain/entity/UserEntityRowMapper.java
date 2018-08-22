@@ -12,22 +12,20 @@ public class UserEntityRowMapper implements RowMapper<UserEntity> {
 
 	private static final Logger logger = LoggerFactory.getLogger(UserEntityRowMapper.class);
 
-	private UserEntityDefinition def;
-
 	@Override
 	public UserEntity mapRow(ResultSet rs, int rowNum) throws SQLException {
-		logger.debug("rowNum = " + rowNum);
+		logger.info("rowNum = " + rowNum);
 		UserEntity user = new UserEntity();
-		user.setAccountRoleId(rs.getInt(def.ACCOUNTROLEID.getMeaning()));
-		user.setCreatedOn(rs.getTimestamp(def.CREATEDON.getMeaning()).toLocalDateTime());
-		user.setEmails(rs.getString(def.EMAILS.getMeaning()));
-		user.setFullName(rs.getString(def.FULLNAME.getMeaning()));
-		user.setLastLogin(rs.getTimestamp(def.LASTLOGIN.getMeaning()).toLocalDateTime());
-		user.setLogin(rs.getString(def.LOGIN.getMeaning()));
-		user.setPassword(rs.getString(def.PASSWORD.getMeaning()));
-		user.setPhones(rs.getString(def.PHONES.getMeaning()));
-		user.setUserId(rs.getInt(def.USERID.getMeaning()));
-		logger.debug(ToStringBuilder.reflectionToString(user));
+		user.setAccountRoleId(rs.getInt(UserEntityDefinition.ACCOUNTROLEID.getMeaning()));
+		user.setCreatedOn(rs.getTimestamp(UserEntityDefinition.CREATEDON.getMeaning()).toLocalDateTime());
+		user.setEmails(rs.getString(UserEntityDefinition.EMAILS.getMeaning()));
+		user.setFullName(rs.getString(UserEntityDefinition.FULLNAME.getMeaning()));
+		user.setLastLogin(rs.getTimestamp(UserEntityDefinition.LASTLOGIN.getMeaning()).toLocalDateTime());
+		user.setLogin(rs.getString(UserEntityDefinition.LOGIN.getMeaning()));
+		user.setPassword(rs.getString(UserEntityDefinition.PASSWORD.getMeaning()));
+		user.setPhones(rs.getString(UserEntityDefinition.PHONES.getMeaning()));
+		user.setUserId(rs.getInt(UserEntityDefinition.USERID.getMeaning()));
+		logger.info(ToStringBuilder.reflectionToString(user));
 		return user;
 	}
 

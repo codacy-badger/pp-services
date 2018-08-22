@@ -2,6 +2,10 @@ package br.com.passeio_pago.module.user.domain.entity;
 
 import java.time.LocalDateTime;
 
+import javax.validation.constraints.PastOrPresent;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import br.com.passeio_pago.module.user.domain.UserPrivate;
 
 /**
@@ -22,8 +26,12 @@ public class UserEntity implements UserPrivate {
 	private String password;
 	private String emails;
 	private String phones;
+	@PastOrPresent
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy hh:mm:ss")
 	private LocalDateTime createdOn;
 	private Integer accountRoleId;
+	@PastOrPresent
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy hh:mm:ss")
 	private LocalDateTime lastLogin;
 
 	public UserEntity() {

@@ -21,6 +21,7 @@ import br.com.passeio_pago.module.user.domain.UserPublic;
 import br.com.passeio_pago.module.user.domain.entity.UserEntity;
 import br.com.passeio_pago.module.user.domain.entity.UserEntityRowMapper;
 import br.com.passeio_pago.module.user.exception.UserNotFoundException;
+import br.com.passeio_pago.module.user.exception.UserRegistrationException;
 
 /**
  * The user dao implementation.
@@ -44,11 +45,16 @@ public class UserDaoImpl extends AbstractDao<UserEntity> implements UserDao {
 
 	@Override
 	public UserPrivate createUser(UserEntity userEntity) {
-		logger.debug(ToStringBuilder.reflectionToString(userEntity));
-		String sql = env.getProperty("sql.insertUser");
-		jdbcTemplate.update(sql, userEntity.getFullName(), userEntity.getLogin(), userEntity.getPassword(), userEntity.getEmails(), userEntity.getPhones(), userEntity.getAccountRoleId());
+		logger.info(ToStringBuilder.reflectionToString(userEntity));
+		try {
+			String sql = env.getProperty("sql.insertUser");
+			jdbcTemplate.update(sql, userEntity.getFullName(), userEntity.getLogin(), userEntity.getPassword(), userEntity.getEmails(), userEntity.getPhones(), userEntity.getAccountRoleId());
+		} catch (DataAccessException e) {
+			logger.info("DataAccessException: " + e.getMessage());
+			throw new UserRegistrationException(e.getMessage().substring(e.getMessage().lastIndexOf("ERROR: ") + 7));
+		}
 		UserPrivate userByLogin = getUserByLogin(userEntity.getLogin());
-		logger.debug(ToStringBuilder.reflectionToString(userByLogin));
+		logger.info(ToStringBuilder.reflectionToString(userByLogin));
 		return userByLogin;
 	}
 
@@ -71,13 +77,14 @@ public class UserDaoImpl extends AbstractDao<UserEntity> implements UserDao {
 	}
 
 	public UserPrivate getUserByLogin(String login) throws UserNotFoundException {
-		logger.debug("login searched: " + login);
+		logger.info("login searched: " + login);
 		try {
 			String sql = env.getProperty("query.findUserByLogin");
 			UserEntity userEntity = jdbcTemplate.queryForObject(sql, new UserEntityRowMapper(), login);
 			return userEntity;
 		} catch (DataAccessException e) {
-			throw new UserNotFoundException("User with login=" + login + " not found.");
+			logger.info("DataAccessException: " + e.getMessage());
+			throw new UserNotFoundException(e.getMessage().substring(e.getMessage().lastIndexOf("ERROR: ") + 7));
 		}
 	}
 }
