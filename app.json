@@ -4,9 +4,7 @@
   "scripts": {
   },
   "env": {
-    "ACTIVATED_PROFILE": {
-      "required": true
-    },
+    "ACTIVATED_PROFILE": "review",
     "PAPERTRAIL_API_TOKEN": {
       "required": true
     }

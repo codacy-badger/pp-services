@@ -49,7 +49,7 @@ public class SwaggerConfig extends WebMvcConfigurationSupport {
 	private ApiInfo apiInfo() {
 		return new ApiInfoBuilder()
 				.title("API Passeio Pago")
-				.description("Web Services que manipulam informações referentes à aplicação Passeio Pago.")
+				.description("Web Services do Passeio Pago.")
 				.version(appVersion)
 				.termsOfServiceUrl("Clientes deste Web Service devem ter autoriza\u00E7\u00E3o para us\u00E1-lo.")
 				.contact(new Contact("Danilo Fernandes Nascimento Moreira", "https://github.com/passeio-pago/pp-services/pulls", "danilo_f.moreira@yahoo.com.br"))
