@@ -5,7 +5,22 @@
   },
   "env": {
     "ACTIVATED_PROFILE": "review",
+    "DATABASE_URL": {
+      "required": true
+    },
     "PAPERTRAIL_API_TOKEN": {
+      "required": true
+    },
+    "SPRING_DATASOURCE_DRIVER_CLASS_NAME": {
+      "required": true
+    },
+    "SPRING_DATASOURCE_PLATFORM": {
+      "required": true
+    },
+    "SPRING_JPA_DATABASE": {
+      "required": true
+    },
+    "SPRING_JPA_DATABASE_PLATFORM": {
       "required": true
     }
   },
