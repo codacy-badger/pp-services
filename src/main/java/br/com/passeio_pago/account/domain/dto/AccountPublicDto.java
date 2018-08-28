@@ -2,7 +2,7 @@ package br.com.passeio_pago.account.domain.dto;
 
 import java.time.LocalDateTime;
 
-import org.springframework.format.annotation.DateTimeFormat;
+import javax.validation.constraints.Past;
 
 import br.com.passeio_pago.account.domain.AccountPublic;
 import br.com.passeio_pago.role.domain.RolePublic;
@@ -24,10 +24,10 @@ public class AccountPublicDto implements AccountPublic {
 	private String password;
 	private String contact;
 
-	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
+	@Past
 	private LocalDateTime createdOn;
 
-	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
+	@Past
 	private LocalDateTime lastLogin;
 	private RolePublic role;
 

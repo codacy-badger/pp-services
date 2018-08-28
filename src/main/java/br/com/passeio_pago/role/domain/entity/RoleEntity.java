@@ -75,7 +75,6 @@ public class RoleEntity implements RolePublic {
 		this.name = name;
 	}
 
-	@Override
 	public List<AccountEntity> getAccounts() {
 		return accounts;
 	}

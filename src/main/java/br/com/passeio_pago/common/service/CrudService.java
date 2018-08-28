@@ -4,6 +4,7 @@ import java.util.NoSuchElementException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -29,7 +30,7 @@ public abstract class CrudService<ENTITY, ENTITY_ID, PUBLIC_DTO, REGISTRATION_DT
 				LOGGER.debug(registrationResponseDto.toString());
 			}
 			return registrationResponseDto;
-		} catch (Exception e) {
+		} catch (DataIntegrityViolationException e) {
 			if (LOGGER.isErrorEnabled()) {
 				LOGGER.error(e.getMessage(), e);
 			}
@@ -45,8 +46,8 @@ public abstract class CrudService<ENTITY, ENTITY_ID, PUBLIC_DTO, REGISTRATION_DT
 
 	public abstract void validateRegistrationDto(REGISTRATION_DTO registrationDto);
 
-	public Page<ENTITY> findAll(int page, int size) {
-		return getDao().findAll(PageRequest.of(page, size));
+	public Page<PUBLIC_DTO> findAll(int page, int size) {
+		return getDao().findAll(PageRequest.of(page, size)).map(entity -> convertEntityDaoToPublicDto(entity));
 	}
 
 	public PUBLIC_DTO findById(ENTITY_ID entityId) throws ElementNotFoundException {

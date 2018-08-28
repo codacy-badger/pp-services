@@ -51,8 +51,8 @@ public class RoleController {
 	}
 
 	@ApiOperation(value = "Find roles by criteria", tags = "roles")
-	@GetMapping(path = "/search")
-	public Page<RoleEntity> findRolesByCriteria(@RequestParam(value = "pageSize", required = true) Integer pageSize, @RequestParam(value = "pageNumber", required = true) Integer pageNumber) {
+	@GetMapping(path = "/all")
+	public Page<RolePublicDto> findRolesByCriteria(@RequestParam(value = "pageSize", required = true) Integer pageSize, @RequestParam(value = "pageNumber", required = true) Integer pageNumber) {
 		return roleService.findAll(pageNumber, pageSize);
 	}
 

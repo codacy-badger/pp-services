@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.passeio_pago.account.domain.dto.AccountPublicDto;
 import br.com.passeio_pago.account.domain.dto.AccountRegistrationDto;
 import br.com.passeio_pago.account.domain.dto.AccountRegistrationResponseDto;
-import br.com.passeio_pago.account.domain.entity.AccountEntity;
 import br.com.passeio_pago.account.exception.AccountNotFoundException;
 import br.com.passeio_pago.account.exception.AccountRegistrationException;
 import br.com.passeio_pago.account.service.AccountService;
@@ -56,7 +55,7 @@ public class AccountController {
 
 	@ApiOperation(value = "Find accounts by criteria", tags = "accounts")
 	@GetMapping(path = "/all")
-	public Page<AccountEntity> findAllAccounts(@RequestParam(value = "pageSize", required = true) Integer pageSize, @RequestParam(value = "pageNumber", required = true) Integer pageNumber) {
+	public Page<AccountPublicDto> findAllAccounts(@RequestParam(value = "pageSize", required = true) Integer pageSize, @RequestParam(value = "pageNumber", required = true) Integer pageNumber) {
 		return accountService.findAll(pageNumber, pageSize);
 	}
 
