@@ -43,6 +43,10 @@ public class RoleEntity implements RolePublic {
 	public RoleEntity() {
 		super();
 	}
+	
+	public RoleEntity(Long id) {
+		this.id = id;
+	}
 
 	public RoleEntity(String name) {
 		this.name = name;

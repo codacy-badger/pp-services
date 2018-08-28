@@ -26,7 +26,7 @@ public class RolePublicDto implements RolePublic {
 	public RolePublicDto(RolePublic role) {
 		this(role.getId(), role.getName(), role.getAccounts());
 	}
-
+	
 	public RolePublicDto(Long id, String name, List<AccountEntity> accounts) {
 		this.id = id;
 		this.name = name;

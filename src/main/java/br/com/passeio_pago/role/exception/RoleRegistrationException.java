@@ -3,13 +3,13 @@ package br.com.passeio_pago.role.exception;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import br.com.passeio_pago.common.exception.BadRequestException;
+import br.com.passeio_pago.common.exception.ElementRegistrationException;
 
 /**
  * User registration exception.
  */
 @ResponseStatus(value = HttpStatus.BAD_REQUEST)
-public class RoleRegistrationException extends BadRequestException {
+public class RoleRegistrationException extends ElementRegistrationException {
 	/**
 	 * 
 	 */

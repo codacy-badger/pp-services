@@ -1,4 +1,4 @@
-package br.com.passeio_pago.common.domain;
+package br.com.passeio_pago.common.domain.dto;
 
 /**
  * Common class which can be used to return a single value.

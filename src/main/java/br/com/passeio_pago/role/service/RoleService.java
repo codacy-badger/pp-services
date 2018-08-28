@@ -1,18 +1,54 @@
 package br.com.passeio_pago.role.service;
 
-import br.com.passeio_pago.common.domain.PaginatedValuesDto;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Service;
+
+import br.com.passeio_pago.common.service.CrudService;
+import br.com.passeio_pago.role.dao.RoleDao;
+import br.com.passeio_pago.role.domain.RolePublic;
 import br.com.passeio_pago.role.domain.dto.RolePublicDto;
 import br.com.passeio_pago.role.domain.dto.RoleRegistrationDto;
 import br.com.passeio_pago.role.domain.dto.RoleRegistrationResponseDto;
-import br.com.passeio_pago.role.exception.RoleNotFoundException;
-import br.com.passeio_pago.role.exception.RoleRegistrationException;
+import br.com.passeio_pago.role.domain.entity.RoleEntity;
 
-public interface RoleService {
-	RoleRegistrationResponseDto registerRole(RoleRegistrationDto roleRegistrationDto) throws RoleRegistrationException;
+/**
+ * All the business logic is implemented in the service layer. It connects to
+ * the dao layer to return data from database. The entity returned should be Dto
+ * and not database entity directly, this allow to hide sensitive database
+ * fields and customise the output.
+ */
+@Service
+public class RoleService extends CrudService<RoleEntity, Long, RolePublicDto, RoleRegistrationDto, RoleRegistrationResponseDto> {
 
-	PaginatedValuesDto<RolePublicDto> findRolesByCriteria(String name, Integer pageSize, Integer pageNumber);
-
-	RolePublicDto getRoleById(Long roleId) throws RoleNotFoundException;
+	@Autowired
+	private RoleDao dao;
 	
-	boolean deleteRoleById(Long roleId) throws RoleNotFoundException;
+	@Override
+	public RoleRegistrationResponseDto convertPublicDtoToRegistrationResponseDto(RolePublicDto publicDto) {
+		RoleRegistrationResponseDto responseDto = new RoleRegistrationResponseDto(publicDto);
+		return responseDto;
+	}
+
+	@Override
+	public RoleEntity convertRegistrationDtoToEntityDao(RoleRegistrationDto registrationDto) {
+		RoleEntity entity = new RoleEntity(registrationDto.getName());
+		return entity;
+	}
+
+	@Override
+	public void validateRegistrationDto(RoleRegistrationDto registrationDto) {
+	}
+
+	@Override
+	public RolePublicDto convertEntityDaoToPublicDto(RoleEntity entity) {
+		RolePublicDto publicDto = new RolePublicDto((RolePublic) entity);
+		return publicDto;
+	}
+
+	@Override
+	public JpaRepository<RoleEntity, Long> getDao() {
+		return dao;
+	}
+
 }
