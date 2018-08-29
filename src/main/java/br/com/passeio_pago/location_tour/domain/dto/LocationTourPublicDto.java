@@ -1,63 +1,54 @@
-package br.com.passeio_pago.location_tour.domain.entity;
+package br.com.passeio_pago.location_tour.domain.dto;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.validation.constraints.Size;
-
 import br.com.passeio_pago.location_tour.domain.LocationTourPublic;
 import br.com.passeio_pago.tour.domain.entity.TourEntity;
+import io.swagger.annotations.ApiModel;
 
-@Entity
-@Table(name = "location_tour")
-public class LocationTourEntity implements LocationTourPublic {
+@ApiModel
+public class LocationTourPublicDto implements LocationTourPublic {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 2085787632567231708L;
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "location_tour_sequence")
-	@SequenceGenerator(name = "location_tour_sequence", sequenceName = "location_tour_sequence")
+	private static final long serialVersionUID = 3438297282281767341L;
 	private Long id;
-
-	@Column(name = "name", nullable = false)
 	private String name;
-
-	@Column(name = "street", nullable = true)
 	private String street;
-
-	@Column(name = "province", nullable = false)
 	private String province;
-
-	@Column(name = "city", nullable = false)
 	private String city;
-
-	@Column(name = "state", nullable = false, length = 2)
-	@Size(min = 2, max = 2)
 	private String state;
-
-	@Column(name = "state_full_name", nullable = false)
 	private String stateFullName;
-
-	@Column(name = "zip_code", nullable = true, length = 8)
 	private String zipCode;
-
-	@Column(name = "contacts", nullable = true)
 	private String[] contacts;
-
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "locationTour")
 	private List<TourEntity> tours;
+
+	public LocationTourPublicDto() {
+		super();
+	}
+
+	public LocationTourPublicDto(LocationTourPublic locationTourPublic) {
+		this(locationTourPublic.getId(), locationTourPublic.getName(), locationTourPublic.getStreet(),
+				locationTourPublic.getProvince(), locationTourPublic.getCity(), locationTourPublic.getState(),
+				locationTourPublic.getStateFullName(), locationTourPublic.getZipCode(),
+				locationTourPublic.getContacts(), locationTourPublic.getTours());
+	}
+
+	public LocationTourPublicDto(Long id, String name, String street, String province, String city, String state,
+			String stateFullName, String zipCode, String[] contacts, List<TourEntity> tours) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.street = street;
+		this.province = province;
+		this.city = city;
+		this.state = state;
+		this.stateFullName = stateFullName;
+		this.zipCode = zipCode;
+		this.contacts = contacts;
+		this.tours = tours;
+	}
 
 	@Override
 	public Long getId() {
