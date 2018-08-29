@@ -13,9 +13,9 @@ import br.com.passeio_pago.common.exception.BadRequestException;
 import br.com.passeio_pago.common.exception.ElementNotFoundException;
 import br.com.passeio_pago.common.exception.ElementRegistrationException;
 
-public abstract class CrudService<ENTITY, ENTITY_ID, PUBLIC_DTO, REGISTRATION_DTO, REGISTRATION_RESPONSE_DTO> {
+public abstract class EntityCrudService<ENTITY, ENTITY_ID, PUBLIC_DTO, REGISTRATION_DTO, REGISTRATION_RESPONSE_DTO> {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(CrudService.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(EntityCrudService.class);
 
 	public REGISTRATION_RESPONSE_DTO register(REGISTRATION_DTO registrationDto) throws ElementRegistrationException, BadRequestException {
 		if (LOGGER.isDebugEnabled()) {

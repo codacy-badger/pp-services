@@ -15,11 +15,18 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.PositiveOrZero;
 
+import br.com.passeio_pago.location_tour.domain.LocationTourPublic;
 import br.com.passeio_pago.location_tour.domain.entity.LocationTourEntity;
+import br.com.passeio_pago.tour.domain.TourPublic;
 
 @Entity
 @Table(name = "tour")
-public class TourEntity {
+public class TourEntity implements TourPublic {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6681637312687054388L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tour_sequence")
@@ -49,6 +56,7 @@ public class TourEntity {
 	@JoinColumn(name = "location_tour_id", nullable = false)
 	private LocationTourEntity locationTour;
 
+	@Override
 	public Long getId() {
 		return id;
 	}
@@ -57,6 +65,7 @@ public class TourEntity {
 		this.id = id;
 	}
 
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -65,6 +74,7 @@ public class TourEntity {
 		this.name = name;
 	}
 
+	@Override
 	public BigDecimal getPrice() {
 		return price;
 	}
@@ -73,6 +83,7 @@ public class TourEntity {
 		this.price = price;
 	}
 
+	@Override
 	public LocalDate getPaymentDeadline() {
 		return paymentDeadline;
 	}
@@ -81,6 +92,7 @@ public class TourEntity {
 		this.paymentDeadline = paymentDeadline;
 	}
 
+	@Override
 	public LocalDate getPublishStartDate() {
 		return publishStartDate;
 	}
@@ -89,6 +101,7 @@ public class TourEntity {
 		this.publishStartDate = publishStartDate;
 	}
 
+	@Override
 	public LocalDate getPublishEndDate() {
 		return publishEndDate;
 	}
@@ -97,6 +110,7 @@ public class TourEntity {
 		this.publishEndDate = publishEndDate;
 	}
 
+	@Override
 	public String getSchoolId() {
 		return schoolId;
 	}
@@ -105,7 +119,8 @@ public class TourEntity {
 		this.schoolId = schoolId;
 	}
 
-	public LocationTourEntity getLocationTour() {
+	@Override
+	public LocationTourPublic getLocationTour() {
 		return locationTour;
 	}
 

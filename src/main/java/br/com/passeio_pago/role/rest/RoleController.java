@@ -28,11 +28,6 @@ import br.com.passeio_pago.role.service.RoleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-/**
- * Controllers expose the REST Api. They do not implement business logic but
- * call the service layer to perform the required operations and return JSON
- * responses.
- */
 @Api(tags = "roles")
 @RestController
 @RequestMapping(name = "RoleController", path = { "/roles" })

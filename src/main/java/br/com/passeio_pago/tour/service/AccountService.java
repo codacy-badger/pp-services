@@ -12,11 +12,11 @@ import br.com.passeio_pago.account.domain.dto.AccountRegistrationDto;
 import br.com.passeio_pago.account.domain.dto.AccountRegistrationResponseDto;
 import br.com.passeio_pago.account.domain.entity.AccountEntity;
 import br.com.passeio_pago.common.exception.ElementRegistrationException;
-import br.com.passeio_pago.common.service.CrudService;
+import br.com.passeio_pago.common.service.EntityCrudService;
 import br.com.passeio_pago.role.domain.entity.RoleEntity;
 
 @Service
-public class AccountService extends CrudService<AccountEntity, Long, AccountPublicDto, AccountRegistrationDto, AccountRegistrationResponseDto> {
+public class AccountService extends EntityCrudService<AccountEntity, Long, AccountPublicDto, AccountRegistrationDto, AccountRegistrationResponseDto> {
 
 	@Autowired
 	private AccountDao dao;

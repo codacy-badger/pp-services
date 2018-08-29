@@ -1,11 +1,5 @@
 package br.com.passeio_pago.common.domain.dto;
 
-/**
- * Common class which can be used to return a single value.
- * 
- * @param <T>
- *            The class to be returned, it should be primitive type.
- */
 public class SingleValueDto<T> {
 	private T value;
 

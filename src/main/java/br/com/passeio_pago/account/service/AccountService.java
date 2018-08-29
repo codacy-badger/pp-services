@@ -1,5 +1,7 @@
 package br.com.passeio_pago.account.service;
 
+import java.time.LocalDateTime;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,11 +14,11 @@ import br.com.passeio_pago.account.domain.dto.AccountRegistrationDto;
 import br.com.passeio_pago.account.domain.dto.AccountRegistrationResponseDto;
 import br.com.passeio_pago.account.domain.entity.AccountEntity;
 import br.com.passeio_pago.common.exception.ElementRegistrationException;
-import br.com.passeio_pago.common.service.CrudService;
+import br.com.passeio_pago.common.service.EntityCrudService;
 import br.com.passeio_pago.role.domain.entity.RoleEntity;
 
 @Service
-public class AccountService extends CrudService<AccountEntity, Long, AccountPublicDto, AccountRegistrationDto, AccountRegistrationResponseDto> {
+public class AccountService extends EntityCrudService<AccountEntity, Long, AccountPublicDto, AccountRegistrationDto, AccountRegistrationResponseDto> {
 
 	@Autowired
 	private AccountDao dao;
@@ -32,6 +34,7 @@ public class AccountService extends CrudService<AccountEntity, Long, AccountPubl
 		AccountEntity entity = new AccountEntity();
 		BeanUtils.copyProperties(registrationDto, entity);
 		entity.setRole(new RoleEntity(registrationDto.getRoleId()));
+		entity.setLastLogin(LocalDateTime.now());
 		return entity;
 	}
 

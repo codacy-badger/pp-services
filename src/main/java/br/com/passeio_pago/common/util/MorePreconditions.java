@@ -6,9 +6,6 @@ import com.google.common.base.Strings;
 
 import br.com.passeio_pago.common.exception.BadRequestException;
 
-/**
- * Common preconditions.
- */
 public final class MorePreconditions {
 	public static void checkNotNullOrEmpty(String value) {
 		checkArgument(!Strings.isNullOrEmpty(value), CommonConstants.ERROR_REQUIRED_VALUE_EMPTY_OR_NULL);

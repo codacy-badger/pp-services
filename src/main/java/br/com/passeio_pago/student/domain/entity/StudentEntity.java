@@ -6,10 +6,17 @@ import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.Table;
 
+import br.com.passeio_pago.student.domain.StudentPublic;
+
 @Entity
 @Table(name = "student")
 @IdClass(StudentEntityPK.class)
-public class StudentEntity {
+public class StudentEntity implements StudentPublic {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1636369575084569684L;
 
 	@Id
 	@Column(name = "registration_id", nullable = false)

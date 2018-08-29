@@ -2,15 +2,12 @@ package br.com.passeio_pago.account.domain.dto;
 
 import java.time.LocalDateTime;
 
-import javax.validation.constraints.Past;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import br.com.passeio_pago.account.domain.AccountPublic;
 import br.com.passeio_pago.role.domain.RolePublic;
 import io.swagger.annotations.ApiModel;
 
-/**
- * Returns Role public information from the Rest controller.
- */
 @ApiModel
 public class AccountPublicDto implements AccountPublic {
 
@@ -23,11 +20,9 @@ public class AccountPublicDto implements AccountPublic {
 	private String login;
 	private String password;
 	private String contact;
-
-	@Past
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss")
 	private LocalDateTime createdOn;
-
-	@Past
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss")
 	private LocalDateTime lastLogin;
 	private RolePublic role;
 

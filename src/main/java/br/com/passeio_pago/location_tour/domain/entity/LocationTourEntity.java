@@ -140,7 +140,6 @@ public class LocationTourEntity implements LocationTourPublic {
 		this.contacts = contacts;
 	}
 
-	@Override
 	public List<TourEntity> getTours() {
 		return tours;
 	}

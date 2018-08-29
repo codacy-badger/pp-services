@@ -3,7 +3,6 @@ package br.com.passeio_pago.account.rest;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
-import javax.security.auth.login.AccountNotFoundException;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,16 +23,14 @@ import br.com.passeio_pago.account.domain.dto.AccountPublicDto;
 import br.com.passeio_pago.account.domain.dto.AccountRegistrationDto;
 import br.com.passeio_pago.account.domain.dto.AccountRegistrationResponseDto;
 import br.com.passeio_pago.account.service.AccountService;
+import br.com.passeio_pago.common.exception.BadRequestException;
 import br.com.passeio_pago.common.exception.ElementNotFoundException;
 import br.com.passeio_pago.common.exception.ElementRegistrationException;
+import br.com.passeio_pago.common.util.MorePreconditions;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 
-/**
- * Controllers expose the REST Api. They do not implement business logic but
- * call the service layer to perform the required operations and return JSON
- * responses.
- */
 @Api(tags = "accounts")
 @RestController
 @RequestMapping(name = "AccountController", path = { "/accounts" })
@@ -54,9 +51,11 @@ public class AccountController {
 		return new Resource<AccountRegistrationResponseDto>(registerAccount, linkTo.withRel("self"));
 	}
 
-	@ApiOperation(value = "Find accounts by criteria", tags = "accounts")
+	@ApiOperation(value = "Get all accounts.", tags = "accounts")
 	@GetMapping(path = "/all")
-	public Page<AccountPublicDto> findAllAccounts(@RequestParam(value = "pageSize", required = true) Integer pageSize, @RequestParam(value = "pageNumber", required = true) Integer pageNumber) {
+	public Page<AccountPublicDto> findAllAccounts(@ApiParam(name = "pageSize", allowableValues = "[1, infinity]") @RequestParam(value = "pageSize", required = true) Integer pageSize,
+			@ApiParam(name = "pageSize", allowableValues = "[0, infinity]") @RequestParam(value = "pageNumber", required = true) Integer pageNumber) throws BadRequestException {
+		MorePreconditions.checkPagination(pageSize, pageNumber);
 		return accountService.findAll(pageNumber, pageSize);
 	}
 
@@ -68,7 +67,7 @@ public class AccountController {
 
 	@ApiOperation(value = "Delete account by id.", tags = "accounts")
 	@DeleteMapping(path = "/{accountId}")
-	public ResponseEntity<Object> deleteAccountById(@PathVariable("accountId") Long accountId) throws AccountNotFoundException {
+	public ResponseEntity<Object> deleteAccountById(@PathVariable("accountId") Long accountId) throws ElementNotFoundException {
 		accountService.deleteById(accountId);
 		return ResponseEntity.ok().build();
 	}

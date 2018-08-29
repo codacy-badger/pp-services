@@ -7,9 +7,6 @@ import javax.validation.constraints.NotNull;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-/**
- * Registration form for a new Role.
- */
 @ApiModel
 public class AccountRegistrationDto {
 

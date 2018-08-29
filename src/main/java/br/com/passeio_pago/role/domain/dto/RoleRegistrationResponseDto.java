@@ -2,9 +2,6 @@ package br.com.passeio_pago.role.domain.dto;
 
 import io.swagger.annotations.ApiModel;
 
-/**
- * Response from the registration form.
- */
 @ApiModel
 public class RoleRegistrationResponseDto {
 

@@ -3,9 +3,6 @@ package br.com.passeio_pago.role.domain.dto;
 import br.com.passeio_pago.role.domain.RolePublic;
 import io.swagger.annotations.ApiModel;
 
-/**
- * Returns Role public information from the Rest controller.
- */
 @ApiModel
 public class RolePublicDto implements RolePublic {
 	/**

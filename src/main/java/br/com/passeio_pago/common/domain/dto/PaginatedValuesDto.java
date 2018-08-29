@@ -3,12 +3,6 @@ package br.com.passeio_pago.common.domain.dto;
 import java.io.Serializable;
 import java.util.Collection;
 
-/**
- * Common class which can be used to return a paginated list of values.
- * 
- * @param <T>
- *            The class to be returned, it should be a Dto class.
- */
 public class PaginatedValuesDto<T> implements Serializable {
 	/**
 	 * 

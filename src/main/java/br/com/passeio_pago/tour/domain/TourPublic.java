@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-import br.com.passeio_pago.location_tour.domain.entity.LocationTourEntity;
+import br.com.passeio_pago.location_tour.domain.LocationTourPublic;
 
 public interface TourPublic extends Serializable {
 	Long getId();
@@ -21,5 +21,5 @@ public interface TourPublic extends Serializable {
 
 	String getSchoolId();
 
-	LocationTourEntity getLocationTour();
+	LocationTourPublic getLocationTour();
 }

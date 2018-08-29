@@ -16,11 +16,6 @@ import javax.persistence.Table;
 import br.com.passeio_pago.account.domain.entity.AccountEntity;
 import br.com.passeio_pago.role.domain.RolePublic;
 
-/**
- * Represents the object database mapping. It should be enriched with the
- * annotations related to the persistence framework, for example MongoDb,
- * Hibernate, etc.
- */
 @Entity
 @Table(name = "role")
 public class RoleEntity implements RolePublic {

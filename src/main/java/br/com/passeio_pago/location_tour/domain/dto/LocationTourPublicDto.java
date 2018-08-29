@@ -1,9 +1,6 @@
 package br.com.passeio_pago.location_tour.domain.dto;
 
-import java.util.List;
-
 import br.com.passeio_pago.location_tour.domain.LocationTourPublic;
-import br.com.passeio_pago.tour.domain.entity.TourEntity;
 import io.swagger.annotations.ApiModel;
 
 @ApiModel
@@ -22,21 +19,17 @@ public class LocationTourPublicDto implements LocationTourPublic {
 	private String stateFullName;
 	private String zipCode;
 	private String[] contacts;
-	private List<TourEntity> tours;
 
 	public LocationTourPublicDto() {
 		super();
 	}
 
 	public LocationTourPublicDto(LocationTourPublic locationTourPublic) {
-		this(locationTourPublic.getId(), locationTourPublic.getName(), locationTourPublic.getStreet(),
-				locationTourPublic.getProvince(), locationTourPublic.getCity(), locationTourPublic.getState(),
-				locationTourPublic.getStateFullName(), locationTourPublic.getZipCode(),
-				locationTourPublic.getContacts(), locationTourPublic.getTours());
+		this(locationTourPublic.getId(), locationTourPublic.getName(), locationTourPublic.getStreet(), locationTourPublic.getProvince(), locationTourPublic.getCity(), locationTourPublic.getState(),
+				locationTourPublic.getStateFullName(), locationTourPublic.getZipCode(), locationTourPublic.getContacts());
 	}
 
-	public LocationTourPublicDto(Long id, String name, String street, String province, String city, String state,
-			String stateFullName, String zipCode, String[] contacts, List<TourEntity> tours) {
+	public LocationTourPublicDto(Long id, String name, String street, String province, String city, String state, String stateFullName, String zipCode, String[] contacts) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -47,7 +40,6 @@ public class LocationTourPublicDto implements LocationTourPublic {
 		this.stateFullName = stateFullName;
 		this.zipCode = zipCode;
 		this.contacts = contacts;
-		this.tours = tours;
 	}
 
 	@Override
@@ -129,15 +121,6 @@ public class LocationTourPublicDto implements LocationTourPublic {
 
 	public void setContacts(String[] contacts) {
 		this.contacts = contacts;
-	}
-
-	@Override
-	public List<TourEntity> getTours() {
-		return tours;
-	}
-
-	public void setTours(List<TourEntity> tours) {
-		this.tours = tours;
 	}
 
 }
