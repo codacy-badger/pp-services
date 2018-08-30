@@ -30,7 +30,7 @@ public class AccountRegistrationDto {
 	@ApiModelProperty(required = false, example = "9993033828", value = "Property to define user's contact.")
 	private String contact;
 
-	@ApiModelProperty(required = true, example = "2", value = "Property to define account's role. For example, 1 = parent, 2 = teacher or 3 = both.")
+	@ApiModelProperty(required = true, example = "2", allowableValues = "1, 2, 3", value = "Property to define account's role. For example, 1 = parent, 2 = teacher or 3 = both.")
 	@NotNull
 	private Long roleId;
 

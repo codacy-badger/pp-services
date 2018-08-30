@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.passeio_pago.common.exception.BadRequestException;
 import br.com.passeio_pago.common.exception.ElementNotFoundException;
 import br.com.passeio_pago.common.exception.ElementRegistrationException;
 import br.com.passeio_pago.role.domain.dto.RolePublicDto;
@@ -27,6 +28,7 @@ import br.com.passeio_pago.role.domain.dto.RoleRegistrationResponseDto;
 import br.com.passeio_pago.role.service.RoleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 
 @Api(tags = "roles")
 @RestController
@@ -46,7 +48,10 @@ public class RoleController {
 
 	@ApiOperation(value = "Find roles by criteria", tags = "roles")
 	@GetMapping(path = "/all")
-	public Page<RolePublicDto> findRolesByCriteria(@RequestParam(value = "pageSize", required = true) Integer pageSize, @RequestParam(value = "pageNumber", required = true) Integer pageNumber) {
+	public Page<RolePublicDto> findAllRoles(
+			@ApiParam(name = "pageSize", defaultValue = "10", required = false, allowableValues = "range[1, infinity]", allowEmptyValue = false, allowMultiple = false, example = "10", value = "Size of the page.") @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize,
+			@ApiParam(name = "pageNumber", defaultValue = "0", required = false, allowableValues = "range[0, infinity]", allowEmptyValue = false, allowMultiple = false, example = "0", value = "Zero-based page index.") @RequestParam(value = "pageNumber", required = false, defaultValue = "0") Integer pageNumber)
+			throws BadRequestException {
 		return roleService.findAll(pageNumber, pageSize);
 	}
 

@@ -2,24 +2,22 @@ package br.com.passeio_pago.tour.domain.dto;
 
 import io.swagger.annotations.ApiModel;
 
-/**
- * Response from the registration form.
- */
 @ApiModel
 public class TourRegistrationResponseDto {
 
-	private TourPublicDto account;
+	private TourPublicDto tour;
 
 	public TourRegistrationResponseDto() {
 		super();
 	}
 
-	public TourPublicDto getAccount() {
-		return account;
+	public TourRegistrationResponseDto(TourPublicDto tour) {
+		super();
+		this.tour = tour;
 	}
 
-	public void setAccount(TourPublicDto account) {
-		this.account = account;
+	public TourPublicDto getTour() {
+		return tour;
 	}
 
 }

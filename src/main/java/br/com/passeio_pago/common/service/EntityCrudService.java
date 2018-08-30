@@ -46,7 +46,7 @@ public abstract class EntityCrudService<ENTITY, ENTITY_ID, PUBLIC_DTO, REGISTRAT
 
 	public abstract void validateRegistrationDto(REGISTRATION_DTO registrationDto);
 
-	public Page<PUBLIC_DTO> findAll(int page, int size) {
+	public Page<PUBLIC_DTO> findAll(Integer page, Integer size) {
 		return getDao().findAll(PageRequest.of(page, size)).map(entity -> convertEntityDaoToPublicDto(entity));
 	}
 

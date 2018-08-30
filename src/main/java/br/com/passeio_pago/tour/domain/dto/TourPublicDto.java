@@ -7,9 +7,6 @@ import br.com.passeio_pago.location_tour.domain.LocationTourPublic;
 import br.com.passeio_pago.tour.domain.TourPublic;
 import io.swagger.annotations.ApiModel;
 
-/**
- * Returns Role public information from the Rest controller.
- */
 @ApiModel
 public class TourPublicDto implements TourPublic {
 

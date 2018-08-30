@@ -11,12 +11,13 @@ public class StudentRegistrationResponseDto {
 		super();
 	}
 
-	public StudentPublicDto getStudent() {
-		return student;
+	public StudentRegistrationResponseDto(StudentPublicDto student) {
+		super();
+		this.student = student;
 	}
 
-	public void setStudent(StudentPublicDto student) {
-		this.student = student;
+	public StudentPublicDto getStudent() {
+		return student;
 	}
 
 }

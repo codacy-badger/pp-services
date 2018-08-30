@@ -6,9 +6,6 @@ import javax.validation.constraints.Size;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-/**
- * Registration form for a new Role.
- */
 @ApiModel
 public class LocationTourRegistrationDto {
 
@@ -40,7 +37,7 @@ public class LocationTourRegistrationDto {
 	@Size(min = 9, max = 9)
 	private String zipCode;
 
-	@ApiModelProperty(required = false, example = "[3276234348, 344343437634, 3223323332]", value = "Property to define some contatics of the location tour.")
+	@ApiModelProperty(required = false, value = "Property to define some contatics of the location tour.")
 	private String[] contacts;
 
 	public String getName() {

@@ -11,12 +11,13 @@ public class LocationTourRegistrationResponseDto {
 		super();
 	}
 
-	public LocationTourPublicDto getAccount() {
-		return locationTour;
+	public LocationTourRegistrationResponseDto(LocationTourPublicDto locationTour) {
+		super();
+		this.locationTour = locationTour;
 	}
 
-	public void setAccount(LocationTourPublicDto account) {
-		this.locationTour = account;
+	public LocationTourPublicDto getLocationTour() {
+		return locationTour;
 	}
 
 }

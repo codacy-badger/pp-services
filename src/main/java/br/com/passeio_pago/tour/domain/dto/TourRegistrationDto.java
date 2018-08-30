@@ -16,9 +16,6 @@ import br.com.passeio_pago.common.util.SalarySerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-/**
- * Registration form for a new Role.
- */
 @ApiModel
 public class TourRegistrationDto {
 
@@ -47,7 +44,7 @@ public class TourRegistrationDto {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
 	private LocalDate publishEndDate;
 
-	@ApiModelProperty(required = true, example = "787646", value = "Property to define the school id.")
+	@ApiModelProperty(required = true, example = "SC787646", value = "Property to define the school id.")
 	@NotNull
 	private String schoolId;
 

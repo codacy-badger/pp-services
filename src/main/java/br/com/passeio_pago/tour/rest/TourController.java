@@ -1,4 +1,4 @@
-package br.com.passeio_pago.account.rest;
+package br.com.passeio_pago.tour.rest;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
@@ -19,58 +19,58 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.passeio_pago.account.domain.dto.AccountPublicDto;
-import br.com.passeio_pago.account.domain.dto.AccountRegistrationDto;
-import br.com.passeio_pago.account.domain.dto.AccountRegistrationResponseDto;
-import br.com.passeio_pago.account.service.AccountService;
 import br.com.passeio_pago.common.exception.BadRequestException;
 import br.com.passeio_pago.common.exception.ElementNotFoundException;
 import br.com.passeio_pago.common.exception.ElementRegistrationException;
 import br.com.passeio_pago.common.util.MorePreconditions;
+import br.com.passeio_pago.tour.domain.dto.TourPublicDto;
+import br.com.passeio_pago.tour.domain.dto.TourRegistrationDto;
+import br.com.passeio_pago.tour.domain.dto.TourRegistrationResponseDto;
+import br.com.passeio_pago.tour.service.TourService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
-@Api(tags = "accounts")
+@Api(tags = "tours")
 @RestController
-@RequestMapping(name = "AccountController", path = { "/accounts" })
-public class AccountController {
+@RequestMapping(name = "TourController", path = { "/tours" })
+public class TourController {
 
-	private AccountService accountService;
+	private TourService tourService;
 
 	@Autowired
-	public AccountController(AccountService accountService) {
-		this.accountService = accountService;
+	public TourController(TourService tourService) {
+		this.tourService = tourService;
 	}
 
-	@ApiOperation(value = "Registers a new account.", tags = "accounts")
+	@ApiOperation(value = "Registers a new tour.", tags = "tours")
 	@PostMapping(path = "/register")
-	public Resource<AccountRegistrationResponseDto> registerAccount(@RequestBody @Valid AccountRegistrationDto accountRegistrationDto) throws ElementRegistrationException {
-		AccountRegistrationResponseDto registerAccount = accountService.register(accountRegistrationDto);
-		ControllerLinkBuilder linkTo = linkTo(methodOn(getClass()).getAccountById(registerAccount.getAccount().getId()));
-		return new Resource<AccountRegistrationResponseDto>(registerAccount, linkTo.withRel("self"));
+	public Resource<TourRegistrationResponseDto> registerTour(@RequestBody @Valid TourRegistrationDto tourRegistrationDto) throws ElementRegistrationException {
+		TourRegistrationResponseDto registerTour = tourService.register(tourRegistrationDto);
+		ControllerLinkBuilder linkTo = linkTo(methodOn(getClass()).getTourById(registerTour.getTour().getId()));
+		return new Resource<TourRegistrationResponseDto>(registerTour, linkTo.withRel("self"));
 	}
 
-	@ApiOperation(value = "Get all accounts.", tags = "accounts")
+	@ApiOperation(value = "Get all tours.", tags = "tours")
 	@GetMapping(path = "/all")
-	public Page<AccountPublicDto> findAllAccounts(
+	public Page<TourPublicDto> findAllTours(
 			@ApiParam(name = "pageSize", defaultValue = "10", required = false, allowableValues = "range[1, infinity]", allowEmptyValue = false, allowMultiple = false, example = "10", value = "Size of the page.") @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize,
 			@ApiParam(name = "pageNumber", defaultValue = "0", required = false, allowableValues = "range[0, infinity]", allowEmptyValue = false, allowMultiple = false, example = "0", value = "Zero-based page index.") @RequestParam(value = "pageNumber", required = false, defaultValue = "0") Integer pageNumber)
 			throws BadRequestException {
 		MorePreconditions.checkPagination(pageSize, pageNumber);
-		return accountService.findAll(pageNumber, pageSize);
+		return tourService.findAll(pageNumber, pageSize);
 	}
 
-	@ApiOperation(value = "Get account by id.", tags = "accounts")
-	@GetMapping(path = "/{accountId}")
-	public AccountPublicDto getAccountById(@PathVariable("accountId") Long accountId) throws ElementNotFoundException {
-		return accountService.findById(accountId);
+	@ApiOperation(value = "Get tour by id.", tags = "tours")
+	@GetMapping(path = "/{tourId}")
+	public TourPublicDto getTourById(@PathVariable("tourId") Long tourId) throws ElementNotFoundException {
+		return tourService.findById(tourId);
 	}
 
-	@ApiOperation(value = "Delete account by id.", tags = "accounts")
-	@DeleteMapping(path = "/{accountId}")
-	public ResponseEntity<Object> deleteAccountById(@PathVariable("accountId") Long accountId) throws ElementNotFoundException {
-		accountService.deleteById(accountId);
+	@ApiOperation(value = "Delete tour by id.", tags = "tours")
+	@DeleteMapping(path = "/{tourId}")
+	public ResponseEntity<Object> deleteTourById(@PathVariable("tourId") Long tourId) throws ElementNotFoundException {
+		tourService.deleteById(tourId);
 		return ResponseEntity.ok().build();
 	}
 }

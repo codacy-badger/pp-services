@@ -8,6 +8,14 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel
 public class StudentRegistrationDto {
 
+	@ApiModelProperty(required = true, example = "RM73683", value = "Property to define the student's id.")
+	@NotBlank
+	private String registrationId;
+	
+	@ApiModelProperty(required = true, example = "SC76263783232", value = "Property to define the school's id.")
+	@NotBlank
+	private String schoolId;
+	
 	@ApiModelProperty(required = true, example = "Danilo", value = "Property to define the student's first name.")
 	@NotBlank
 	private String firstName;

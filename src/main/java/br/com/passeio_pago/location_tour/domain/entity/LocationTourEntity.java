@@ -50,7 +50,7 @@ public class LocationTourEntity implements LocationTourPublic {
 	@Column(name = "state_full_name", nullable = false)
 	private String stateFullName;
 
-	@Column(name = "zip_code", nullable = true, length = 8)
+	@Column(name = "zip_code", nullable = true, length = 10)
 	private String zipCode;
 
 	@Column(name = "contacts", nullable = true)
@@ -58,6 +58,15 @@ public class LocationTourEntity implements LocationTourPublic {
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "locationTour")
 	private List<TourEntity> tours;
+
+	public LocationTourEntity(Long id) {
+		super();
+		this.id = id;
+	}
+
+	public LocationTourEntity() {
+		super();
+	}
 
 	@Override
 	public Long getId() {
