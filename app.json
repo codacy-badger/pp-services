@@ -6,9 +6,6 @@
 	},
 	"env": {
 		"ACTIVATED_PROFILE": "review",
-		"DATABASE_URL": {
-			"required": true
-		},
 		"PAPERTRAIL_API_TOKEN": {
 			"required": true
 		},
