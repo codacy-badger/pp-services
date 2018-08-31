@@ -31,12 +31,10 @@ public class TourRegistrationDto {
 	private BigDecimal price;
 
 	@ApiModelProperty(required = false, example = "12/08/2019", value = "Property to define the payment dead line.")
-	@NotBlank
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
 	private LocalDate paymentDeadline;
 
 	@ApiModelProperty(required = false, example = "27/08/2018", value = "Property to define the start date to activate the tour warning.")
-	@NotBlank
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
 	private LocalDate publishStartDate;
 
@@ -45,7 +43,7 @@ public class TourRegistrationDto {
 	private LocalDate publishEndDate;
 
 	@ApiModelProperty(required = true, example = "SC787646", value = "Property to define the school id.")
-	@NotNull
+	@NotBlank
 	private String schoolId;
 
 	@ApiModelProperty(required = true, example = "2", value = "Property to define the location tour id.")

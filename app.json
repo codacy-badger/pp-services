@@ -1,41 +1,35 @@
 {
-  "name": "pp-services",
-  "description": "app.json criado para permitir os reviews apps",
-  "scripts": {
-  },
-  "env": {
-    "ACTIVATED_PROFILE": "review",
-    "DATABASE_URL": {
-      "required": true
-    },
-    "PAPERTRAIL_API_TOKEN": {
-      "required": true
-    },
-    "SPRING_DATASOURCE_DRIVER_CLASS_NAME": {
-      "required": true
-    },
-    "SPRING_DATASOURCE_PLATFORM": {
-      "required": true
-    },
-    "SPRING_JPA_DATABASE": {
-      "required": true
-    },
-    "SPRING_JPA_DATABASE_PLATFORM": {
-      "required": true
-    }
-  },
-  "formation": {
-    "web": {
-      "quantity": 1
-    }
-  },
-  "addons": [
-    "papertrail",
-    "heroku-postgresql"
-  ],
-  "buildpacks": [
-    {
-      "url": "heroku/java"
-    }
-  ]
+	"name": "pp-services",
+	"description": "app.json criado para permitir os reviews apps",
+	"scripts": {
+		
+	},
+	"env": {
+		"ACTIVATED_PROFILE": "review",
+		"DATABASE_URL": {
+			"required": true
+		},
+		"PAPERTRAIL_API_TOKEN": {
+			"required": true
+		},
+		"SPRING_DATASOURCE_DRIVER_CLASS_NAME": "org.postgresql.Driver",
+		"SPRING_DATASOURCE_PLATFORM": "pg",
+		"SPRING_JPA_DATABASE": "postgresql",
+		"SPRING_JPA_DATABASE_PLATFORM": "org.hibernate.dialect.PostgreSQL95Dialect",
+		"SPRING_JPA_HIBERNATE_DDL_AUTO": "create-drop"
+	},
+	"formation": {
+		"web": {
+			"quantity": 1
+		}
+	},
+	"addons": [
+		"papertrail",
+		"heroku-postgresql"
+	],
+	"buildpacks": [
+		{
+			"url": "heroku/java"
+		}
+	]
 }
