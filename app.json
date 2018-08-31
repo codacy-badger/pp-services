@@ -9,10 +9,18 @@
 		"PAPERTRAIL_API_TOKEN": {
 			"required": true
 		},
-		"SPRING_DATASOURCE_DRIVER_CLASS_NAME": "org.postgresql.Driver",
-		"SPRING_DATASOURCE_PLATFORM": "pg",
-		"SPRING_JPA_DATABASE": "postgresql",
-		"SPRING_JPA_DATABASE_PLATFORM": "org.hibernate.dialect.PostgreSQL95Dialect",
+		"SPRING_DATASOURCE_DRIVER_CLASS_NAME": {
+			"required": true
+		},
+		"SPRING_DATASOURCE_PLATFORM": {
+			"required": true
+		},
+		"SPRING_JPA_DATABASE": {
+			"required": true
+		},
+		"SPRING_JPA_DATABASE_PLATFORM": {
+			"required": true
+		},
 		"SPRING_JPA_HIBERNATE_DDL_AUTO": "create-drop"
 	},
 	"formation": {
