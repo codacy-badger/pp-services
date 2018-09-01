@@ -49,7 +49,8 @@ public class AccountService extends EntityCrudService<AccountEntity, Long, Accou
 
 	@Override
 	public AccountPublicDto convertEntityDaoToPublicDto(AccountEntity entity) {
-		AccountPublicDto publicDto = new AccountPublicDto((AccountPublic) entity);
+		AccountPublic entity2 = (AccountPublic) entity;
+		AccountPublicDto publicDto = new AccountPublicDto(entity2);
 		return publicDto;
 	}
 

@@ -24,7 +24,6 @@ public class TourRegistrationDto {
 	private String name;
 
 	@ApiModelProperty(required = true, example = "R$ 80,50", value = "Property to define the tour's price.")
-	@NotBlank
 	@JsonSerialize(using = SalarySerializer.class)
 	@JsonDeserialize(using = SalaryDeserializer.class)
 	@Digits(fraction = 2, integer = 6)
