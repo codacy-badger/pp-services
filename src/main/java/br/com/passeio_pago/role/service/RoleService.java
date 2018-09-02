@@ -37,7 +37,7 @@ public class RoleService extends SimpleAbstractCrudService<RoleDto, Long, RoleEn
 		return dao;
 	}
 
-	public RoleDto register(LocationTourRegistrationDto registerDto) throws ElementRegistrationException {
+	public RoleDto register(RoleRegistrationDto registerDto) throws ElementRegistrationException {
 		return register(new RoleDto(registerDto.getName()));
 	}
 }

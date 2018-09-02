@@ -34,7 +34,7 @@ import io.swagger.annotations.ApiOperation;
 @Api(tags = "roles")
 @RestController
 @RequestMapping(name = "RoleController", path = { "/roles" })
-public class RoleController implements SimpleCrudCrontroller<RoleDto, Long, LocationTourRegistrationDto> {
+public class RoleController implements SimpleCrudCrontroller<RoleDto, Long, RoleRegistrationDto> {
 
 	@Autowired
 	private RoleService roleService;
@@ -51,7 +51,7 @@ public class RoleController implements SimpleCrudCrontroller<RoleDto, Long, Loca
 	@PostMapping("/register")
 	@ApiOperation(value = "Registers a new role, like \"teacher\", \"parent\" or \"both\" for both roles.", tags = "roles")
 	@Override
-	public Resource<RoleDto> register(@RequestBody @Valid LocationTourRegistrationDto registerDto) throws ElementRegistrationException {
+	public Resource<RoleDto> register(@RequestBody @Valid RoleRegistrationDto registerDto) throws ElementRegistrationException {
 		RoleDto dto = roleService.register(registerDto);
 		Link link = linkTo(methodOn(getClass()).findByID(dto.getId())).withSelfRel();
 		return new Resource<RoleDto>(dto, link);

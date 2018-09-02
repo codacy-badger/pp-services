@@ -44,7 +44,7 @@ public class LocationTourRegistrationDto {
 	@Size(min = 9, max = 9)
 	private String zipCode;
 
-	@ApiModelProperty(required = false, example = "(11) 94100-0172", value = "Property to define some contatics of the location.")
+	@ApiModelProperty(required = false, example = "(11) 94100-0172", value = "Property to define some contatics of the location.  Must be in the format \"(dd) xxxxx-xxxx\".")
 	@Pattern(regexp = CommonPatterns.PHONE_NUMBER_PATTERN)
 	@Size(max = 30)
 	private String phoneNumber;

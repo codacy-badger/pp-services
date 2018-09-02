@@ -34,7 +34,7 @@ public class AccountRegistrationDto {
 	@Size(max=20)
 	private String repeatedPassword;
 
-	@ApiModelProperty(required = false, example = "(11) 94100-0172", value = "Property to define account's contact.")
+	@ApiModelProperty(required = false, example = "(11) 94100-0172", value = "Property to define account's contact. Must be in the format \"(dd) xxxxx-xxxx\".")
 	@Pattern(regexp = CommonPatterns.PHONE_NUMBER_PATTERN)
 	@Size(max = 30)
 	private String phoneNumber;
