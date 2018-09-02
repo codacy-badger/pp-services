@@ -2,17 +2,15 @@ package br.com.passeio_pago.common.util;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.base.Strings;
 
 import br.com.passeio_pago.common.exception.BadRequestException;
 
 public final class MorePreconditions {
-	public static void checkNotNullOrEmpty(String value) {
-		checkArgument(!Strings.isNullOrEmpty(value), CommonConstants.ERROR_REQUIRED_VALUE_EMPTY_OR_NULL);
-	}
-
 	public static void checkNotNullOrEmptyWithBadRequest(String value) {
-		if (Strings.isNullOrEmpty(value)) {
+		if (StringUtils.isBlank(value)) {
 			throw new BadRequestException(CommonConstants.ERROR_REQUIRED_VALUE_EMPTY_OR_NULL);
 		}
 	}
