@@ -8,7 +8,7 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel
 public class RoleRegistrationDto {
 
-	@ApiModelProperty(required = true, example = "parent", value = "Property to define account's role.", allowableValues = "parent, teacher, both")
+	@ApiModelProperty(required = true, example = "parent", value = "Property to define account's role. This value must be unique.", allowableValues = "parent, teacher, both", allowEmptyValue = false)
 	@NotBlank
 	private String name;
 

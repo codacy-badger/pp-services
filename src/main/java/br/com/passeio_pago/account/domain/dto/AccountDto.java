@@ -20,7 +20,7 @@ public class AccountDto implements Serializable {
 	private String password;
 	private String phoneNumber;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss")
-	private LocalDateTime createdOn;
+	private LocalDateTime createdOn = LocalDateTime.now();
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss")
 	private LocalDateTime lastLogin;
 	private Long roleId;

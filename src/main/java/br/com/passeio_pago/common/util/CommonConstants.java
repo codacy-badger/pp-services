@@ -5,4 +5,5 @@ public final class CommonConstants {
 	public static final String ERROR_INVALID_PAGE_NUMBER = "ERROR_INVALID_PAGE_NUMBER";
 	public static final String ERROR_REQUIRED_VALUE_EMPTY_OR_NULL = "ERROR_REQUIRED_VALUE_EMPTY_OR_NULL";
 	public static final String ERROR_ELEMENT_NOT_FOUND = "ERROR_ELEMENT_NOT_FOUND";
+	public static final String ERROR_REGISTRATION_ELEMENT = "ERROR_REGISTRATION_ELEMENT";
 }

@@ -9,6 +9,7 @@ import br.com.passeio_pago.account.dao.AccountRepository;
 import br.com.passeio_pago.account.domain.dto.AccountDto;
 import br.com.passeio_pago.account.domain.dto.AccountRegistrationDto;
 import br.com.passeio_pago.account.domain.entity.AccountEntity;
+import br.com.passeio_pago.common.exception.ElementRegistrationException;
 import br.com.passeio_pago.common.service.SimpleAbstractCrudService;
 import br.com.passeio_pago.role.domain.entity.RoleEntity;
 
@@ -41,9 +42,18 @@ public class AccountService extends SimpleAbstractCrudService<AccountDto, Long, 
 		return dao;
 	}
 
-	public AccountDto register(AccountRegistrationDto registerDto) {
+	public AccountDto register(AccountRegistrationDto registerDto) throws ElementRegistrationException {
+		validateUserRegistration(registerDto);
 		AccountDto accountDto = new AccountDto();
 		BeanUtils.copyProperties(registerDto, accountDto);
 		return register(accountDto);
+	}
+
+	private void validateUserRegistration(AccountRegistrationDto registerDto) throws ElementRegistrationException {
+		String password = registerDto.getPassword();
+		String repeatedPassword = registerDto.getRepeatedPassword();
+		if (!password.equals(repeatedPassword)) {
+			throw new ElementRegistrationException("The passwords must be equals.");
+		}
 	}
 }

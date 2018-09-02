@@ -12,6 +12,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import br.com.passeio_pago.common.exception.BadRequestException;
 import br.com.passeio_pago.common.exception.ElementNotFoundException;
 import br.com.passeio_pago.common.exception.ElementRegistrationException;
+import br.com.passeio_pago.common.util.CommonConstants;
 
 public abstract class SimpleAbstractCrudService<DTO, ID, ENTITY> implements SimpleCrudService<DTO, ID> {
 
@@ -38,7 +39,14 @@ public abstract class SimpleAbstractCrudService<DTO, ID, ENTITY> implements Simp
 			if (LOGGER.isErrorEnabled()) {
 				LOGGER.error(e.getMessage(), e);
 			}
-			throw new ElementRegistrationException(e.getMessage());
+			String message = CommonConstants.ERROR_REGISTRATION_ELEMENT;
+			if (e.getMessage().contains("constraint [\"UK")) {
+				message = "Unique constraint violate. This element already exists.";
+			}
+			if (e.getMessage().contains("constraint [\"FK")) {
+				message = "Foreign key constraint violate. There are not relational element with this id.";
+			}
+			throw new ElementRegistrationException(message);
 		}
 	}
 

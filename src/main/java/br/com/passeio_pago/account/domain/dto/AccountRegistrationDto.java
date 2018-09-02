@@ -16,7 +16,7 @@ public class AccountRegistrationDto {
 	@NotBlank
 	private String name;
 
-	@ApiModelProperty(required = true, example = "danilo@email.com", value = "Property to define account's email login.")
+	@ApiModelProperty(required = true, example = "danilo@email.com", value = "Property to define account's email login. This value must be unique.")
 	@NotBlank
 	@Email
 	private String login;
