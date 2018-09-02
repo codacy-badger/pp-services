@@ -4,8 +4,9 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-import javax.validation.constraints.PositiveOrZero;
+import javax.validation.constraints.Digits;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -20,17 +21,27 @@ public class TourDto implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -1924544611823501290L;
+
 	private Long id;
+
 	private String name;
-	
+
 	@JsonSerialize(using = SalarySerializer.class)
 	@JsonDeserialize(using = SalaryDeserializer.class)
-//	@PositiveOrZero
-	private BigDecimal price = BigDecimal.valueOf(Double.valueOf("0.0"));
+	@Digits(fraction = 2, integer = 6)
+	private BigDecimal price;
+
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
 	private LocalDate paymentDeadline;
+
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
 	private LocalDate publishStartDate;
+
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
 	private LocalDate publishEndDate;
+
 	private String schoolId;
+
 	private Long locationTourId;
 
 	public Long getId() {

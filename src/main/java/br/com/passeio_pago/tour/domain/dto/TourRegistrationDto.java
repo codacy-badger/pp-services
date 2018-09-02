@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -30,11 +31,11 @@ public class TourRegistrationDto implements Serializable {
 	@Size(max = 400)
 	private String name;
 
-	@ApiModelProperty(required = true, example = "R$ 80,50", value = "Property to define the tour's price.")
+	@ApiModelProperty(required = true, example = "R$80,50", value = "Property to define the tour's price.")
 	@JsonSerialize(using = SalarySerializer.class)
 	@JsonDeserialize(using = SalaryDeserializer.class)
-	// @PositiveOrZero
-	private BigDecimal price = BigDecimal.valueOf(Double.valueOf("0.0"));
+	@Digits(fraction = 2, integer = 6)
+	private BigDecimal price;
 
 	@ApiModelProperty(required = false, example = "12/08/2019", value = "Property to define the payment dead line.")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")

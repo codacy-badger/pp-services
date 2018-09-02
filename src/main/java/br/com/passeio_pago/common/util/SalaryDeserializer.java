@@ -15,7 +15,10 @@ import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
  */
 public class SalaryDeserializer extends StdDeserializer<BigDecimal> {
 
-	private static final long serialVersionUID = -5773392806959986581L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -718925592151208525L;
 
 	public SalaryDeserializer() {
 		super(BigDecimal.class);
@@ -24,7 +27,10 @@ public class SalaryDeserializer extends StdDeserializer<BigDecimal> {
 	@Override
 	public BigDecimal deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JsonProcessingException {
 		try {
-			return new BigDecimal(NumberFormat.getCurrencyInstance().parse(p.readValueAs(String.class)).toString());
+			String value = p.readValueAs(String.class);
+			NumberFormat currencyInstance = NumberFormat.getCurrencyInstance();
+			Number parse = currencyInstance.parse(value);
+			return new BigDecimal(parse.toString());
 		} catch (ParseException e) {
 			return null;
 		}
