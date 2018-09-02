@@ -2,6 +2,9 @@ package br.com.passeio_pago.location_tour.domain.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.Pattern;
+
+import br.com.passeio_pago.common.util.CommonPatterns;
 import io.swagger.annotations.ApiModel;
 
 @ApiModel
@@ -19,6 +22,7 @@ public class LocationTourDto implements Serializable {
 	private String state;
 	private String stateFullName;
 	private String zipCode;
+	@Pattern(regexp = CommonPatterns.PHONE_NUMBER_PATTERN)
 	private String phoneNumber;
 
 	public LocationTourDto() {

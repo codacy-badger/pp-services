@@ -1,5 +1,7 @@
 package br.com.passeio_pago.account.domain.dto;
 
+import java.io.Serializable;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -11,7 +13,12 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel
-public class AccountRegistrationDto {
+public class AccountRegistrationDto implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8261588443231032724L;
 
 	@ApiModelProperty(required = true, example = "Danilo Moreira", value = "Property to define account's full name.")
 	@NotBlank

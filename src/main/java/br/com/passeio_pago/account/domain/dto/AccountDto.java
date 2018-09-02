@@ -3,6 +3,8 @@ package br.com.passeio_pago.account.domain.dto;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+import javax.validation.constraints.Email;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import io.swagger.annotations.ApiModel;
@@ -16,6 +18,7 @@ public class AccountDto implements Serializable {
 	private static final long serialVersionUID = 3430129304606583961L;
 	private Long id;
 	private String name;
+	@Email
 	private String login;
 	private String password;
 	private String phoneNumber;

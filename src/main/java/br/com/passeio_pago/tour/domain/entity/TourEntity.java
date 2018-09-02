@@ -40,7 +40,7 @@ public class TourEntity {
 	@Column(name = "publish_end_date", nullable = true)
 	private LocalDate publishEndDate;
 
-	@Column(name = "school_id", nullable = false)
+	@Column(name = "school_id", nullable = false, length=100)
 	private String schoolId;
 
 	@ManyToOne(fetch = FetchType.LAZY)

@@ -1,5 +1,7 @@
 package br.com.passeio_pago.location_tour.domain.dto;
 
+import java.io.Serializable;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -9,7 +11,12 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel
-public class LocationTourRegistrationDto {
+public class LocationTourRegistrationDto implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6317410428712322622L;
 
 	@ApiModelProperty(required = true, example = "Parque Hopi Hari", value = "Property to define the name of the location where the tour will be.")
 	@NotBlank
@@ -44,7 +51,7 @@ public class LocationTourRegistrationDto {
 	@Size(min = 9, max = 9)
 	private String zipCode;
 
-	@ApiModelProperty(required = false, example = "(11) 94100-0172", value = "Property to define some contatics of the location.  Must be in the format \"(dd) xxxxx-xxxx\".")
+	@ApiModelProperty(required = false, example = "(11) 94100-0172", value = "Property to define some contatics of the location.  Must be in the format \"(dd) xxxx-xxxx\".")
 	@Pattern(regexp = CommonPatterns.PHONE_NUMBER_PATTERN)
 	@Size(max = 30)
 	private String phoneNumber;
