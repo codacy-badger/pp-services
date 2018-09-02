@@ -26,7 +26,7 @@ public class TourDto implements Serializable {
 	@JsonSerialize(using = SalarySerializer.class)
 	@JsonDeserialize(using = SalaryDeserializer.class)
 //	@PositiveOrZero
-	private BigDecimal price;
+	private BigDecimal price = BigDecimal.valueOf(Double.valueOf("0.0"));
 	private LocalDate paymentDeadline;
 	private LocalDate publishStartDate;
 	private LocalDate publishEndDate;

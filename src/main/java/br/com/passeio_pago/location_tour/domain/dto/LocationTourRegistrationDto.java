@@ -51,7 +51,7 @@ public class LocationTourRegistrationDto implements Serializable {
 	@Size(min = 9, max = 9)
 	private String zipCode;
 
-	@ApiModelProperty(required = false, example = "(11) 94100-0172", value = "Property to define some contatics of the location.  Must be in the format \"(dd) xxxx-xxxx\".")
+	@ApiModelProperty(required = false, example = "(11) 98832-0100", value = "Property to define some contatics of the location.  Must be in the format \"(dd) xxxx-xxxx\".")
 	@Pattern(regexp = CommonPatterns.PHONE_NUMBER_PATTERN)
 	@Size(max = 30)
 	private String phoneNumber;
