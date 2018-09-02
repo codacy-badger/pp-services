@@ -4,6 +4,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import br.com.passeio_pago.common.util.CommonPatterns;
 import io.swagger.annotations.ApiModel;
@@ -14,23 +15,28 @@ public class AccountRegistrationDto {
 
 	@ApiModelProperty(required = true, example = "Danilo Moreira", value = "Property to define account's full name.")
 	@NotBlank
+	@Size(max=400)
 	private String name;
 
 	@ApiModelProperty(required = true, example = "danilo@email.com", value = "Property to define account's email login. This value must be unique.")
 	@NotBlank
 	@Email
+	@Size(max=400)
 	private String login;
 
 	@ApiModelProperty(required = true, example = "qwert@123", value = "Property to define account's password.")
 	@NotBlank
+	@Size(max=20)
 	private String password;
 
 	@ApiModelProperty(required = true, example = "qwert@123", value = "Property to validate the password.")
 	@NotBlank
+	@Size(max=20)
 	private String repeatedPassword;
 
 	@ApiModelProperty(required = false, example = "(11) 94100-0172", value = "Property to define account's contact.")
 	@Pattern(regexp = CommonPatterns.PHONE_NUMBER_PATTERN)
+	@Size(max = 30)
 	private String phoneNumber;
 
 	@ApiModelProperty(required = true, example = "1", allowableValues = "1, 2, 3", value = "Property to define account's role.")
