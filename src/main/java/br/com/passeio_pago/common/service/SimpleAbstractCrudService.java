@@ -23,7 +23,7 @@ public abstract class SimpleAbstractCrudService<DTO, ID, ENTITY> implements Simp
 	}
 
 	@Override
-	public DTO register(DTO dto) {
+	public DTO register(DTO dto) throws ElementRegistrationException {
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug(dto.toString());
 		}
@@ -43,7 +43,7 @@ public abstract class SimpleAbstractCrudService<DTO, ID, ENTITY> implements Simp
 	}
 
 	@Override
-	public void deleteById(ID id) {
+	public void deleteById(ID id) throws BadRequestException, ElementNotFoundException {
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug(String.format("id toString() = %s", id.toString()));
 		}
@@ -63,7 +63,7 @@ public abstract class SimpleAbstractCrudService<DTO, ID, ENTITY> implements Simp
 	}
 
 	@Override
-	public DTO findByID(ID id) {
+	public DTO findByID(ID id) throws BadRequestException, ElementNotFoundException {
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug(String.format("id toString() = %s", id.toString()));
 		}

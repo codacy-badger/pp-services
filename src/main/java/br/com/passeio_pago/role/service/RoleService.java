@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
+import br.com.passeio_pago.common.exception.ElementRegistrationException;
 import br.com.passeio_pago.common.service.SimpleAbstractCrudService;
 import br.com.passeio_pago.role.dao.RoleRepository;
 import br.com.passeio_pago.role.domain.dto.RoleDto;
@@ -36,7 +37,7 @@ public class RoleService extends SimpleAbstractCrudService<RoleDto, Long, RoleEn
 		return dao;
 	}
 
-	public RoleDto register(RoleRegistrationDto registerDto) {
+	public RoleDto register(RoleRegistrationDto registerDto) throws ElementRegistrationException {
 		return register(new RoleDto(registerDto.getName()));
 	}
 }
