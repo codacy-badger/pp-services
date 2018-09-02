@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.passeio_pago.account.dao.AccountDao;
 import br.com.passeio_pago.account.domain.AccountPublic;
-import br.com.passeio_pago.account.domain.dto.AccountPublicDto;
+import br.com.passeio_pago.account.domain.dto.AccountDto;
 import br.com.passeio_pago.account.domain.dto.AccountRegistrationDto;
 import br.com.passeio_pago.account.domain.dto.AccountRegistrationResponseDto;
 import br.com.passeio_pago.account.domain.entity.AccountEntity;
@@ -18,13 +18,13 @@ import br.com.passeio_pago.common.service.EntityCrudService;
 import br.com.passeio_pago.role.domain.entity.RoleEntity;
 
 @Service
-public class AccountService extends EntityCrudService<AccountEntity, Long, AccountPublicDto, AccountRegistrationDto, AccountRegistrationResponseDto> {
+public class AccountService extends EntityCrudService<AccountEntity, Long, AccountDto, AccountRegistrationDto, AccountRegistrationResponseDto> {
 
 	@Autowired
 	private AccountDao dao;
 
 	@Override
-	public AccountRegistrationResponseDto convertPublicDtoToRegistrationResponseDto(AccountPublicDto publicDto) {
+	public AccountRegistrationResponseDto convertPublicDtoToRegistrationResponseDto(AccountDto publicDto) {
 		AccountRegistrationResponseDto responseDto = new AccountRegistrationResponseDto(publicDto);
 		return responseDto;
 	}
@@ -48,9 +48,9 @@ public class AccountService extends EntityCrudService<AccountEntity, Long, Accou
 	}
 
 	@Override
-	public AccountPublicDto convertEntityDaoToPublicDto(AccountEntity entity) {
+	public AccountDto convertEntityDaoToPublicDto(AccountEntity entity) {
 		AccountPublic entity2 = (AccountPublic) entity;
-		AccountPublicDto publicDto = new AccountPublicDto(entity2);
+		AccountDto publicDto = new AccountDto(entity2);
 		return publicDto;
 	}
 

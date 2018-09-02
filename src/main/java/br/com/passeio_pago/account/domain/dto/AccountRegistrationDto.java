@@ -3,14 +3,16 @@ package br.com.passeio_pago.account.domain.dto;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
+import br.com.passeio_pago.common.util.CommonPatterns;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel
 public class AccountRegistrationDto {
 
-	@ApiModelProperty(required = true, example = "Danilo Moreira", value = "Property to define user's full name. For example, Danilo Moreira, Renan Lima.")
+	@ApiModelProperty(required = true, example = "Danilo Moreira", value = "Property to define account's full name.")
 	@NotBlank
 	private String name;
 
@@ -19,18 +21,19 @@ public class AccountRegistrationDto {
 	@Email
 	private String login;
 
-	@ApiModelProperty(required = true, example = "psw123", value = "Property to define account's password.")
+	@ApiModelProperty(required = true, example = "qwert@123", value = "Property to define account's password.")
 	@NotBlank
 	private String password;
 
-	@ApiModelProperty(required = true, example = "psw123", value = "Property to validate the password.")
+	@ApiModelProperty(required = true, example = "qwert@123", value = "Property to validate the password.")
 	@NotBlank
 	private String repeatedPassword;
 
-	@ApiModelProperty(required = false, example = "9993033828", value = "Property to define user's contact.")
-	private String contact;
+	@ApiModelProperty(required = false, example = "(11) 94100-0172", value = "Property to define account's contact.")
+	@Pattern(regexp = CommonPatterns.PHONE_NUMBER_PATTERN)
+	private String phoneNumber;
 
-	@ApiModelProperty(required = true, example = "2", allowableValues = "1, 2, 3", value = "Property to define account's role. For example, 1 = parent, 2 = teacher or 3 = both.")
+	@ApiModelProperty(required = true, example = "1", allowableValues = "1, 2, 3", value = "Property to define account's role.")
 	@NotNull
 	private Long roleId;
 
@@ -66,12 +69,12 @@ public class AccountRegistrationDto {
 		this.repeatedPassword = repeatedPassword;
 	}
 
-	public String getContact() {
-		return contact;
+	public String getPhoneNumber() {
+		return phoneNumber;
 	}
 
-	public void setContact(String contact) {
-		this.contact = contact;
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
 	public Long getRoleId() {

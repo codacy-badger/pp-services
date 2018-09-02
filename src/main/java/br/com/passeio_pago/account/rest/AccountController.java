@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.passeio_pago.account.domain.dto.AccountPublicDto;
+import br.com.passeio_pago.account.domain.dto.AccountDto;
 import br.com.passeio_pago.account.domain.dto.AccountRegistrationDto;
 import br.com.passeio_pago.account.domain.dto.AccountRegistrationResponseDto;
 import br.com.passeio_pago.account.service.AccountService;
@@ -53,7 +53,7 @@ public class AccountController {
 
 	@ApiOperation(value = "Get all accounts.", tags = "accounts")
 	@GetMapping(path = "/all")
-	public Page<AccountPublicDto> findAllAccounts(
+	public Page<AccountDto> findAllAccounts(
 			@ApiParam(name = "pageSize", defaultValue = "10", required = false, allowableValues = "range[1, infinity]", allowEmptyValue = false, allowMultiple = false, example = "10", value = "Size of the page.") @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize,
 			@ApiParam(name = "pageNumber", defaultValue = "0", required = false, allowableValues = "range[0, infinity]", allowEmptyValue = false, allowMultiple = false, example = "0", value = "Zero-based page index.") @RequestParam(value = "pageNumber", required = false, defaultValue = "0") Integer pageNumber)
 			throws BadRequestException {
@@ -63,7 +63,7 @@ public class AccountController {
 
 	@ApiOperation(value = "Get account by id.", tags = "accounts")
 	@GetMapping(path = "/{accountId}")
-	public AccountPublicDto getAccountById(@PathVariable("accountId") Long accountId) throws ElementNotFoundException {
+	public AccountDto getAccountById(@PathVariable("accountId") Long accountId) throws ElementNotFoundException {
 		return accountService.findById(accountId);
 	}
 
