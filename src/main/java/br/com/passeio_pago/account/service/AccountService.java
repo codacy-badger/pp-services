@@ -1,62 +1,49 @@
 package br.com.passeio_pago.account.service;
 
-import java.time.LocalDateTime;
-
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
-import br.com.passeio_pago.account.dao.AccountDao;
-import br.com.passeio_pago.account.domain.AccountPublic;
+import br.com.passeio_pago.account.dao.AccountRepository;
 import br.com.passeio_pago.account.domain.dto.AccountDto;
 import br.com.passeio_pago.account.domain.dto.AccountRegistrationDto;
-import br.com.passeio_pago.account.domain.dto.AccountRegistrationResponseDto;
 import br.com.passeio_pago.account.domain.entity.AccountEntity;
-import br.com.passeio_pago.common.exception.ElementRegistrationException;
-import br.com.passeio_pago.common.service.EntityCrudService;
+import br.com.passeio_pago.common.service.SimpleAbstractCrudService;
 import br.com.passeio_pago.role.domain.entity.RoleEntity;
 
 @Service
-public class AccountService extends EntityCrudService<AccountEntity, Long, AccountDto, AccountRegistrationDto, AccountRegistrationResponseDto> {
+public class AccountService extends SimpleAbstractCrudService<AccountDto, Long, AccountEntity> {
 
 	@Autowired
-	private AccountDao dao;
+	private AccountRepository dao;
 
 	@Override
-	public AccountRegistrationResponseDto convertPublicDtoToRegistrationResponseDto(AccountDto publicDto) {
-		AccountRegistrationResponseDto responseDto = new AccountRegistrationResponseDto(publicDto);
-		return responseDto;
+	protected AccountDto mapEntityToDto(AccountEntity entity) {
+		AccountDto dto = new AccountDto();
+		BeanUtils.copyProperties(entity, dto);
+		dto.setRoleId(entity.getRole().getId());
+		return dto;
 	}
 
 	@Override
-	public AccountEntity convertRegistrationDtoToEntityDao(AccountRegistrationDto registrationDto) {
+	protected AccountEntity mapDtoToEntity(AccountDto dto) {
 		AccountEntity entity = new AccountEntity();
-		BeanUtils.copyProperties(registrationDto, entity);
-		entity.setRole(new RoleEntity(registrationDto.getRoleId()));
-		entity.setLastLogin(LocalDateTime.now());
+		BeanUtils.copyProperties(dto, entity);
+		RoleEntity roleEntity = new RoleEntity();
+		roleEntity.setId(dto.getRoleId());
+		entity.setRole(roleEntity);
 		return entity;
 	}
 
 	@Override
-	public void validateRegistrationDto(AccountRegistrationDto registrationDto) {
-		String password = registrationDto.getPassword();
-		String repeatedPassword = registrationDto.getRepeatedPassword();
-		if (!password.equals(repeatedPassword)) {
-			throw new ElementRegistrationException("The passwords must be the same.");
-		}
-	}
-
-	@Override
-	public AccountDto convertEntityDaoToPublicDto(AccountEntity entity) {
-		AccountPublic entity2 = (AccountPublic) entity;
-		AccountDto publicDto = new AccountDto(entity2);
-		return publicDto;
-	}
-
-	@Override
-	public JpaRepository<AccountEntity, Long> getDao() {
+	protected JpaRepository<AccountEntity, Long> getDao() {
 		return dao;
 	}
 
+	public AccountDto register(AccountRegistrationDto registerDto) {
+		AccountDto accountDto = new AccountDto();
+		BeanUtils.copyProperties(registerDto, accountDto);
+		return register(accountDto);
+	}
 }

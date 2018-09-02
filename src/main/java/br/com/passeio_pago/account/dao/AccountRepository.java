@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import br.com.passeio_pago.account.domain.entity.AccountEntity;
 
 @Repository
-public interface AccountDao extends JpaRepository<AccountEntity, Long> {
+public interface AccountRepository extends JpaRepository<AccountEntity, Long> {
 
 }

@@ -15,11 +15,6 @@ public class FrutaService extends SimpleAbstractCrudService<FrutaDto, Long, Frut
 	private FrutaRepository dao;
 
 	@Override
-	public FrutaDto register(FrutaDto dto) {
-		return mapEntityToDto(dao.save(mapDtoToEntity(dto)));
-	}
-
-	@Override
 	protected FrutaDto mapEntityToDto(FrutaEntity entity) {
 		FrutaDto dto = new FrutaDto();
 		BeanUtils.copyProperties(entity, dto);
