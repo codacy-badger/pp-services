@@ -2,7 +2,7 @@ package br.com.passeio_pago.common.service;
 
 import java.util.List;
 
-public interface SimpleCrudService<DTO, ID> {
+interface SimpleCrudService<DTO, ID> {
 
 	List<DTO> getAll();
 
