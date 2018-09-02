@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.passeio_pago.common.exception.BadRequestException;
 import br.com.passeio_pago.common.exception.ElementNotFoundException;
 import br.com.passeio_pago.common.exception.ElementRegistrationException;
-import br.com.passeio_pago.role.domain.dto.RolePublicDto;
+import br.com.passeio_pago.role.domain.dto.RoleDto;
 import br.com.passeio_pago.role.domain.dto.RoleRegistrationDto;
 import br.com.passeio_pago.role.domain.dto.RoleRegistrationResponseDto;
 import br.com.passeio_pago.role.service.RoleService;
@@ -48,7 +48,7 @@ public class RoleController {
 
 	@ApiOperation(value = "Find roles by criteria", tags = "roles")
 	@GetMapping(path = "/all")
-	public Page<RolePublicDto> findAllRoles(
+	public Page<RoleDto> findAllRoles(
 			@ApiParam(name = "pageSize", defaultValue = "10", required = false, allowableValues = "range[1, infinity]", allowEmptyValue = false, allowMultiple = false, example = "10", value = "Size of the page.") @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize,
 			@ApiParam(name = "pageNumber", defaultValue = "0", required = false, allowableValues = "range[0, infinity]", allowEmptyValue = false, allowMultiple = false, example = "0", value = "Zero-based page index.") @RequestParam(value = "pageNumber", required = false, defaultValue = "0") Integer pageNumber)
 			throws BadRequestException {
@@ -57,7 +57,7 @@ public class RoleController {
 
 	@ApiOperation(value = "Get role by id.", tags = "roles")
 	@GetMapping(path = "/{roleId}")
-	public RolePublicDto getRoleById(@PathVariable("roleId") Long roleId) throws ElementNotFoundException {
+	public RoleDto getRoleById(@PathVariable("roleId") Long roleId) throws ElementNotFoundException {
 		return roleService.findById(roleId);
 	}
 

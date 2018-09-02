@@ -7,19 +7,19 @@ import org.springframework.stereotype.Service;
 import br.com.passeio_pago.common.service.EntityCrudService;
 import br.com.passeio_pago.role.dao.RoleDao;
 import br.com.passeio_pago.role.domain.RolePublic;
-import br.com.passeio_pago.role.domain.dto.RolePublicDto;
+import br.com.passeio_pago.role.domain.dto.RoleDto;
 import br.com.passeio_pago.role.domain.dto.RoleRegistrationDto;
 import br.com.passeio_pago.role.domain.dto.RoleRegistrationResponseDto;
 import br.com.passeio_pago.role.domain.entity.RoleEntity;
 
 @Service
-public class RoleService extends EntityCrudService<RoleEntity, Long, RolePublicDto, RoleRegistrationDto, RoleRegistrationResponseDto> {
+public class RoleService extends EntityCrudService<RoleEntity, Long, RoleDto, RoleRegistrationDto, RoleRegistrationResponseDto> {
 
 	@Autowired
 	private RoleDao dao;
 	
 	@Override
-	public RoleRegistrationResponseDto convertPublicDtoToRegistrationResponseDto(RolePublicDto publicDto) {
+	public RoleRegistrationResponseDto convertPublicDtoToRegistrationResponseDto(RoleDto publicDto) {
 		RoleRegistrationResponseDto responseDto = new RoleRegistrationResponseDto(publicDto);
 		return responseDto;
 	}
@@ -35,8 +35,8 @@ public class RoleService extends EntityCrudService<RoleEntity, Long, RolePublicD
 	}
 
 	@Override
-	public RolePublicDto convertEntityDaoToPublicDto(RoleEntity entity) {
-		RolePublicDto publicDto = new RolePublicDto((RolePublic) entity);
+	public RoleDto convertEntityDaoToPublicDto(RoleEntity entity) {
+		RoleDto publicDto = new RoleDto((RolePublic) entity);
 		return publicDto;
 	}
 

@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
-import br.com.passeio_pago.teste.commons.SimpleAbstractCrudService;
+import br.com.passeio_pago.common.service.SimpleAbstractCrudService;
 
 @Service
 public class CestaService extends SimpleAbstractCrudService<CestaDto, Long, CestaEntity> {

@@ -14,45 +14,22 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import br.com.passeio_pago.account.domain.entity.AccountEntity;
-import br.com.passeio_pago.role.domain.RolePublic;
 
 @Entity
 @Table(name = "role")
-public class RoleEntity implements RolePublic {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -4608676036956931925L;
+public class RoleEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "role_sequence")
 	@SequenceGenerator(name = "role_sequence", sequenceName = "role_sequence")
 	private Long id;
 
-	@Column(name = "name", nullable = false, unique = true)
+	@Column(name = "name", nullable = false, unique = true, length = 100)
 	private String name;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "role")
 	private List<AccountEntity> accounts;
 
-	public RoleEntity() {
-		super();
-	}
-	
-	public RoleEntity(Long id) {
-		this.id = id;
-	}
-
-	public RoleEntity(String name) {
-		this.name = name;
-	}
-
-	public RoleEntity(Long id, String name) {
-		this.id = id;
-		this.name = name;
-	}
-
-	@Override
 	public Long getId() {
 		return id;
 	}
@@ -61,7 +38,6 @@ public class RoleEntity implements RolePublic {
 		this.id = id;
 	}
 
-	@Override
 	public String getName() {
 		return name;
 	}

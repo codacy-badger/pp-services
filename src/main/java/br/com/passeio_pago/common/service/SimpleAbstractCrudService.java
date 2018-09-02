@@ -1,4 +1,4 @@
-package br.com.passeio_pago.teste.commons;
+package br.com.passeio_pago.common.service;
 
 import java.util.List;
 import java.util.stream.Collectors;

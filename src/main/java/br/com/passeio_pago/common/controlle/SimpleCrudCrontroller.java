@@ -1,4 +1,4 @@
-package br.com.passeio_pago.teste.commons;
+package br.com.passeio_pago.common.controlle;
 
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;

@@ -1,4 +1,4 @@
-package br.com.passeio_pago.common.domain.dto;
+package br.com.passeio_pago.common.dto;
 
 import java.io.Serializable;
 import java.util.Collection;

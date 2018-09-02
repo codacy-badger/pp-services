@@ -5,8 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
+import br.com.passeio_pago.common.service.SimpleAbstractCrudService;
 import br.com.passeio_pago.teste.cesta.CestaEntity;
-import br.com.passeio_pago.teste.commons.SimpleAbstractCrudService;
 
 @Service
 public class FrutaService extends SimpleAbstractCrudService<FrutaDto, Long, FrutaEntity> {

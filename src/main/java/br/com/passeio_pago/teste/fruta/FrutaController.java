@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.passeio_pago.teste.commons.SimpleCrudCrontroller;
+import br.com.passeio_pago.common.controlle.SimpleCrudCrontroller;
 
 @RestController
 @RequestMapping(path = { "/frutas" })

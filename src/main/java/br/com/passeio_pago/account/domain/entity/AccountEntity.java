@@ -12,51 +12,40 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.validation.constraints.Past;
-import javax.validation.constraints.PastOrPresent;
 
-import br.com.passeio_pago.account.domain.AccountPublic;
 import br.com.passeio_pago.role.domain.entity.RoleEntity;
 
 @Entity
 @Table(name = "account")
-public class AccountEntity implements AccountPublic {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -346703794500144918L;
+public class AccountEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "account_sequence")
 	@SequenceGenerator(name = "account_sequence", sequenceName = "account_sequence")
 	private Long id;
 
-	@Column(name = "name", nullable = false)
+	@Column(name = "name", nullable = false, length = 400)
 	private String name;
 
-	@Column(name = "login", nullable = false, unique = true)
+	@Column(name = "login", nullable = false, unique = true, length = 400)
 	private String login;
 
-	@Column(name = "password", nullable = false)
+	@Column(name = "password", nullable = false, length = 20)
 	private String password;
 
-	@Column(name = "contact", nullable = false)
-	private String contact;
+	@Column(name = "phone_number", nullable = false, length = 30)
+	private String phoneNumber;
 
-	@PastOrPresent
-	@Column(name = "createdOn", nullable = false)
+	@Column(name = "created_on", nullable = false)
 	private LocalDateTime createdOn = LocalDateTime.now();
 
-	@Past
-	@Column(name = "lastLogin", nullable = true)
+	@Column(name = "last_login", nullable = true)
 	private LocalDateTime lastLogin;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "role_id", nullable = false)
 	private RoleEntity role;
 
-	@Override
 	public Long getId() {
 		return id;
 	}
@@ -65,7 +54,6 @@ public class AccountEntity implements AccountPublic {
 		this.id = id;
 	}
 
-	@Override
 	public String getName() {
 		return name;
 	}
@@ -74,7 +62,6 @@ public class AccountEntity implements AccountPublic {
 		this.name = name;
 	}
 
-	@Override
 	public String getLogin() {
 		return login;
 	}
@@ -83,7 +70,6 @@ public class AccountEntity implements AccountPublic {
 		this.login = login;
 	}
 
-	@Override
 	public String getPassword() {
 		return password;
 	}
@@ -92,7 +78,14 @@ public class AccountEntity implements AccountPublic {
 		this.password = password;
 	}
 
-	@Override
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
 	public LocalDateTime getCreatedOn() {
 		return createdOn;
 	}
@@ -101,7 +94,6 @@ public class AccountEntity implements AccountPublic {
 		this.createdOn = createdOn;
 	}
 
-	@Override
 	public LocalDateTime getLastLogin() {
 		return lastLogin;
 	}
@@ -110,22 +102,12 @@ public class AccountEntity implements AccountPublic {
 		this.lastLogin = lastLogin;
 	}
 
-	@Override
 	public RoleEntity getRole() {
 		return role;
 	}
 
 	public void setRole(RoleEntity role) {
 		this.role = role;
-	}
-
-	@Override
-	public String getContact() {
-		return contact;
-	}
-
-	public void setContact(String contact) {
-		this.contact = contact;
 	}
 
 }
