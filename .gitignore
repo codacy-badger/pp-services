@@ -1,6 +1,9 @@
 
 # Created by https://www.gitignore.io/api/java,macos,maven,eclipse,windows,java-web,netbeans,code-java,visualstudio,intellij+all,visualstudiocode
 
+### h2 database ###
+H2_DB/
+
 ### Heroku ###
 .env
 
