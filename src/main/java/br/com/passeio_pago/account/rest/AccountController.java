@@ -49,7 +49,7 @@ public class AccountController implements SimpleCrudCrontroller<AccountDto, Long
 	}
 
 	@PostMapping("/register")
-	@ApiOperation(value = "Registers a new account, like \"teacher\", \"parent\" or \"both\" for both accounts.", tags = "accounts")
+	@ApiOperation(value = "Registers a new account.", tags = "accounts")
 	@Override
 	public Resource<AccountDto> register(@RequestBody @Valid AccountRegistrationDto registerDto) throws ElementRegistrationException {
 		AccountDto dto = accountService.register(registerDto);
