@@ -45,6 +45,9 @@ public class LocationTourEntity {
 	@Column(name = "state_full_name", nullable = false, length = 200)
 	private String stateFullName;
 
+	@Column(name = "country", nullable = false, length = 200)
+	private String country;
+
 	@Column(name = "zip_code", nullable = true, length = 9)
 	private String zipCode;
 
@@ -140,6 +143,14 @@ public class LocationTourEntity {
 
 	public void setStreetNumber(String streetNumber) {
 		this.streetNumber = streetNumber;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
 	}
 
 }

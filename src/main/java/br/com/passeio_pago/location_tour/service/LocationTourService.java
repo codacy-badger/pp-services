@@ -101,6 +101,9 @@ public class LocationTourService extends SimpleAbstractCrudService<LocationTourD
 											dto.setState(shortName);
 											dto.setStateFullName(longName);
 											break;
+										case "country":
+											dto.setCountry(longName);
+											break;
 										case "postal_code":
 											dto.setZipCode(longName);
 											break;

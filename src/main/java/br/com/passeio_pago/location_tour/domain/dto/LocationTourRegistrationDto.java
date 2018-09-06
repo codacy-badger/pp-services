@@ -27,7 +27,7 @@ public class LocationTourRegistrationDto implements Serializable {
 	@Size(max = 400)
 	private String street;
 
-	@ApiModelProperty(required = false, example = "s/n", value = "Property to define the street of the location.")
+	@ApiModelProperty(required = false, example = "s/n", value = "Property to define the street number of the location.")
 	@Size(max = 400)
 	private String streetNumber;
 
@@ -50,6 +50,11 @@ public class LocationTourRegistrationDto implements Serializable {
 	@NotBlank
 	@Size(max = 200)
 	private String stateFullName;
+
+	@ApiModelProperty(required = true, example = "Brazil", value = "Property to define the country of the location tour.")
+	@NotBlank
+	@Size(max = 200)
+	private String country;
 
 	@ApiModelProperty(required = false, example = "13288-130", value = "Property to define the zip code of the location tour.")
 	@Size(min = 9, max = 9)
@@ -130,6 +135,14 @@ public class LocationTourRegistrationDto implements Serializable {
 
 	public void setStreetNumber(String streetNumber) {
 		this.streetNumber = streetNumber;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
 	}
 
 }

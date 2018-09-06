@@ -1,8 +1,5 @@
 package br.com.passeio_pago.common.external_resources;
 
-import java.util.Arrays;
-import java.util.List;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

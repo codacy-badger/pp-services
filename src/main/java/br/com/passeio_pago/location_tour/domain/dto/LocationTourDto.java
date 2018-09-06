@@ -22,6 +22,7 @@ public class LocationTourDto implements Serializable {
 	private String city;
 	private String state;
 	private String stateFullName;
+	private String country;
 	private String zipCode;
 	@Pattern(regexp = CommonPatterns.PHONE_NUMBER_PATTERN)
 	private String phoneNumber;
@@ -108,6 +109,14 @@ public class LocationTourDto implements Serializable {
 
 	public void setStreetNumber(String streetNumber) {
 		this.streetNumber = streetNumber;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
 	}
 
 }
