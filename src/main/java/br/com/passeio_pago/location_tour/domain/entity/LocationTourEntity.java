@@ -51,7 +51,7 @@ public class LocationTourEntity {
 	@Column(name = "zip_code", nullable = true, length = 9)
 	private String zipCode;
 
-	@Column(name = "phone_number", nullable = false, length = 30)
+	@Column(name = "phone_number", nullable = true, length = 30)
 	private String phoneNumber;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "locationTour")
