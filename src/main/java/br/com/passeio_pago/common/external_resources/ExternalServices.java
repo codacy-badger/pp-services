@@ -18,7 +18,7 @@ public class ExternalServices {
 
 	@Bean
 	public String googleGeocodeWebService() {
-		return "https://maps.googleapis.com/maps/api/geocode/json?key=" + System.getProperty("GOOGLE_GEOCODE_KEY");
+		return "https://maps.googleapis.com/maps/api/geocode/json?key=" + System.getenv("GOOGLE_GEOCODE_KEY");
 	}
 
 }
