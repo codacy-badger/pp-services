@@ -30,6 +30,9 @@ public class LocationTourEntity {
 	@Column(name = "street", nullable = true, length = 400)
 	private String street;
 
+	@Column(name = "street_number", nullable = true, length = 400)
+	private String streetNumber;
+
 	@Column(name = "province", nullable = false, length = 200)
 	private String province;
 
@@ -129,6 +132,14 @@ public class LocationTourEntity {
 
 	public void setTours(List<TourEntity> tours) {
 		this.tours = tours;
+	}
+
+	public String getStreetNumber() {
+		return streetNumber;
+	}
+
+	public void setStreetNumber(String streetNumber) {
+		this.streetNumber = streetNumber;
 	}
 
 }

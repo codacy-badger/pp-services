@@ -17,6 +17,7 @@ public class LocationTourDto implements Serializable {
 	private Long id;
 	private String name;
 	private String street;
+	private String streetNumber;
 	private String province;
 	private String city;
 	private String state;
@@ -99,6 +100,14 @@ public class LocationTourDto implements Serializable {
 
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
+	}
+
+	public String getStreetNumber() {
+		return streetNumber;
+	}
+
+	public void setStreetNumber(String streetNumber) {
+		this.streetNumber = streetNumber;
 	}
 
 }

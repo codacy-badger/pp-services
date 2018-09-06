@@ -72,4 +72,10 @@ public class LocationTourController implements SimpleCrudCrontroller<LocationTou
 		return locationTourService.findByID(id);
 	}
 
+	@GetMapping("/googleMaps/{address}")
+	@ApiOperation(value = "Get location tour in Google Maps. Example: Museu do Amanhã, Hopi Hari, Museu do Ipiranga, any String or Zip Code.", tags = "locationsTour")
+	public LocationTourDto findInGoogleMaps(@PathVariable(name = "address") String address) throws ElementNotFoundException {
+		return locationTourService.findInGoogleMaps(address);
+	}
+
 }

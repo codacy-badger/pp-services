@@ -27,6 +27,10 @@ public class LocationTourRegistrationDto implements Serializable {
 	@Size(max = 400)
 	private String street;
 
+	@ApiModelProperty(required = false, example = "s/n", value = "Property to define the street of the location.")
+	@Size(max = 400)
+	private String streetNumber;
+
 	@ApiModelProperty(required = true, example = "Vinhedo", value = "Property to define the province of the location.")
 	@NotBlank
 	@Size(max = 200)
@@ -118,6 +122,14 @@ public class LocationTourRegistrationDto implements Serializable {
 
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
+	}
+
+	public String getStreetNumber() {
+		return streetNumber;
+	}
+
+	public void setStreetNumber(String streetNumber) {
+		this.streetNumber = streetNumber;
 	}
 
 }
