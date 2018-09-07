@@ -46,7 +46,7 @@ public class LocationTourRegistrationDto implements Serializable {
 	@Size(min = 2, max = 2)
 	private String state;
 
-	@ApiModelProperty(required = true, example = "São Paulo", value = "Property to define the state's full name of the location tour.")
+	@ApiModelProperty(required = false, example = "São Paulo", value = "Property to define the state's full name of the location tour.")
 	@NotBlank
 	@Size(max = 200)
 	private String stateFullName;

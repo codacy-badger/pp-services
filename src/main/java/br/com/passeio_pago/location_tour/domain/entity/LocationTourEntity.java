@@ -42,7 +42,7 @@ public class LocationTourEntity {
 	@Column(name = "state", nullable = false, length = 2)
 	private String state;
 
-	@Column(name = "state_full_name", nullable = false, length = 200)
+	@Column(name = "state_full_name", nullable = true, length = 200)
 	private String stateFullName;
 
 	@Column(name = "country", nullable = false, length = 200)

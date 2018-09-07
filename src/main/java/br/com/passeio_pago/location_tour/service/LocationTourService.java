@@ -3,8 +3,6 @@ package br.com.passeio_pago.location_tour.service;
 import java.net.URI;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
-import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,9 +33,6 @@ public class LocationTourService extends SimpleAbstractCrudService<LocationTourD
 
 	@Autowired
 	private RestTemplate restTemplate;
-
-	private static List<String> googleAddressComponentTypes = Arrays.asList("street_number", "route", "sublocality_level_1", "administrative_area_level_2", "administrative_area_level_1", "country",
-			"postal_code");
 
 	@Override
 	protected LocationTourDto mapEntityToDto(LocationTourEntity entity) {
@@ -74,44 +69,27 @@ public class LocationTourService extends SimpleAbstractCrudService<LocationTourD
 			JsonNode results = root.path("results");
 			if (results.isArray()) {
 				for (JsonNode item : results) {
-					JsonNode addressComponents = item.get("address_components");
-					if (addressComponents.isArray()) {
-						for (JsonNode component : addressComponents) {
-							String longName = component.get("long_name").asText();
-							String shortName = component.get("short_name").asText();
-							JsonNode types = component.get("types");
-							if (types.isArray()) {
-								for (JsonNode type : types) {
-									String typeValue = type.asText();
-									if (googleAddressComponentTypes.contains(typeValue)) {
-										switch (typeValue) {
-										case "street_number":
-											dto.setStreetNumber(longName);
-											break;
-										case "route":
-											dto.setStreet(longName);
-											break;
-										case "sublocality_level_1":
-											dto.setProvince(longName);
-											break;
-										case "administrative_area_level_2":
-											dto.setCity(longName);
-											break;
-										case "administrative_area_level_1":
-											dto.setState(shortName);
-											dto.setStateFullName(longName);
-											break;
-										case "country":
-											dto.setCountry(longName);
-											break;
-										case "postal_code":
-											dto.setZipCode(longName);
-											break;
-										}
-									}
-								}
-							}
-						}
+					String formattedAddress = item.get("formatted_address").asText();
+					String[] split = formattedAddress.split(" - ");
+					String string = split[split.length - 1];
+					String[] split2 = string.split(", ");
+					dto.setCountry(split2[split2.length - 1]);
+					dto.setZipCode(split2[split2.length - 2]);
+					dto.setState(split2[split2.length - 3]);
+					String string2 = split[0];
+					if (string2.contains(", ")) {
+						dto.setStreet(string2.substring(0, string2.lastIndexOf(", ")));
+						dto.setStreetNumber(string2.substring(string2.lastIndexOf(", ") + 2));
+					} else {
+						dto.setStreet(string2);
+					}
+					if (split.length == 2) {
+						dto.setProvince(string.substring(0, string.indexOf(", ")));
+					} else if (split.length == 3) {
+						String string3 = split[1];
+						String[] split3 = string3.split(", ");
+						dto.setProvince(split3[0]);
+						dto.setCity(split3[1]);
 					}
 				}
 			}
