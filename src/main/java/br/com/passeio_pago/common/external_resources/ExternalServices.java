@@ -1,5 +1,6 @@
 package br.com.passeio_pago.common.external_resources;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -16,9 +17,12 @@ public class ExternalServices {
 		return tcuWebServiceHost() + "nossaEscolaRS/rest/escolas/";
 	}
 
+	@Value("${GOOGLE_GEOCODE_KEY}")
+	private String googleGeocodeKey;
+
 	@Bean
 	public String googleGeocodeWebService() {
-		return "https://maps.googleapis.com/maps/api/geocode/json?key=" + System.getenv("GOOGLE_GEOCODE_KEY");
+		return "https://maps.googleapis.com/maps/api/geocode/json?key=" + googleGeocodeKey;
 	}
 
 }

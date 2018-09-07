@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.passeio_pago.common.controlle.SimpleCrudCrontroller;
@@ -30,6 +31,7 @@ import br.com.passeio_pago.location_tour.domain.dto.LocationTourRegistrationDto;
 import br.com.passeio_pago.location_tour.service.LocationTourService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 
 @Api(tags = "locationsTour")
 @RestController
@@ -72,9 +74,9 @@ public class LocationTourController implements SimpleCrudCrontroller<LocationTou
 		return locationTourService.findByID(id);
 	}
 
-	@GetMapping("/googleMaps/{address}")
+	@GetMapping("/googleMaps")
 	@ApiOperation(value = "Get location tour in Google Maps. Example: Museu do Amanhã, Hopi Hari, Museu do Ipiranga, any String or Zip Code.", tags = "locationsTour")
-	public LocationTourDto findInGoogleMaps(@PathVariable(name = "address") String address) throws ElementNotFoundException {
+	public LocationTourDto findInGoogleMaps(@ApiParam(required = true, example = "Museu do Ipiranga", value = "The place to be looked for.") @RequestParam(name = "address", required = true) String address) throws ElementNotFoundException {
 		return locationTourService.findInGoogleMaps(address);
 	}
 
