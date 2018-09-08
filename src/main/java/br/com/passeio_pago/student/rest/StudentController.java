@@ -3,6 +3,7 @@ package br.com.passeio_pago.student.rest;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,7 +12,6 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.Resource;
-import org.springframework.hateoas.Resources;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,10 +43,11 @@ public class StudentController implements SimpleCrudCrontroller<StudentDto, Stud
 	@GetMapping("/all")
 	@ApiOperation(value = "get all students", tags = "students")
 	@Override
-	public Resources<StudentDto> getAll() {
-		List<StudentDto> all = studentService.getAll();
-		List<Link> links = all.stream().map(student -> linkTo(methodOn(getClass()).findByID(student.getRegistrationId(), student.getSchoolId())).withSelfRel()).collect(Collectors.toList());
-		return new Resources<StudentDto>(all, links);
+	public List<Resource<StudentDto>> getAll() {
+		return studentService.getAll().stream().map(student -> {
+			Link link = linkTo(methodOn(getClass()).findByID(student.getRegistrationId(), student.getSchoolId())).withSelfRel();
+			return new Resource<StudentDto>(student, link);
+		}).collect(Collectors.toList());
 	}
 
 	@PostMapping("/register")
@@ -56,6 +57,17 @@ public class StudentController implements SimpleCrudCrontroller<StudentDto, Stud
 		StudentDto dto = studentService.register(registerDto);
 		Link link = linkTo(methodOn(getClass()).findByID(dto.getRegistrationId(), dto.getSchoolId())).withSelfRel();
 		return new Resource<StudentDto>(dto, link);
+	}
+
+	@PostMapping("/registerMultiples")
+	@ApiOperation(value = "Registers multiples new students.", tags = "students")
+	public List<Resource<StudentDto>> registerMultiples(@RequestBody @Valid StudentRegistrationDto[] arrayRegisterDto) throws ElementRegistrationException {
+		List<Resource<StudentDto>> list = new ArrayList<Resource<StudentDto>>();
+		for (StudentRegistrationDto registerDto : arrayRegisterDto) {
+			Resource<StudentDto> register = register(registerDto);
+			list.add(register);
+		}
+		return list;
 	}
 
 	@Override

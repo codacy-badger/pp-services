@@ -11,7 +11,6 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.Resource;
-import org.springframework.hateoas.Resources;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,10 +41,11 @@ public class TourController implements SimpleCrudCrontroller<TourDto, Long, Tour
 	@GetMapping("/all")
 	@ApiOperation(value = "get all tours", tags = "tours")
 	@Override
-	public Resources<TourDto> getAll() {
-		List<TourDto> all = tourService.getAll();
-		List<Link> links = all.stream().map(tour -> linkTo(methodOn(getClass()).findByID(tour.getId())).withSelfRel()).collect(Collectors.toList());
-		return new Resources<TourDto>(all, links);
+	public List<Resource<TourDto>> getAll() {
+		return tourService.getAll().stream().map(tour -> {
+			Link link = linkTo(methodOn(getClass()).findByID(tour.getId())).withSelfRel();
+			return new Resource<TourDto>(tour, link);
+		}).collect(Collectors.toList());
 	}
 
 	@PostMapping("/register")

@@ -11,7 +11,6 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.Resource;
-import org.springframework.hateoas.Resources;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,10 +41,11 @@ public class AccountController implements SimpleCrudCrontroller<AccountDto, Long
 	@GetMapping("/all")
 	@ApiOperation(value = "get all accounts", tags = "accounts")
 	@Override
-	public Resources<AccountDto> getAll() {
-		List<AccountDto> all = accountService.getAll();
-		List<Link> links = all.stream().map(account -> linkTo(methodOn(getClass()).findByID(account.getId())).withSelfRel()).collect(Collectors.toList());
-		return new Resources<AccountDto>(all, links);
+	public List<Resource<AccountDto>> getAll() {
+		return accountService.getAll().stream().map(account -> {
+			Link link = linkTo(methodOn(getClass()).findByID(account.getId())).withSelfRel();
+			return new Resource<AccountDto>(account, link);
+		}).collect(Collectors.toList());
 	}
 
 	@PostMapping("/register")

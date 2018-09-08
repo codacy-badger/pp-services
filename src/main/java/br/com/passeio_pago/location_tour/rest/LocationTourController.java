@@ -11,7 +11,6 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.Resource;
-import org.springframework.hateoas.Resources;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,10 +43,11 @@ public class LocationTourController implements SimpleCrudCrontroller<LocationTou
 	@GetMapping("/all")
 	@ApiOperation(value = "get all locations tour", tags = "locationsTour")
 	@Override
-	public Resources<LocationTourDto> getAll() {
-		List<LocationTourDto> all = locationTourService.getAll();
-		List<Link> links = all.stream().map(locationTour -> linkTo(methodOn(getClass()).findByID(locationTour.getId())).withSelfRel()).collect(Collectors.toList());
-		return new Resources<LocationTourDto>(all, links);
+	public List<Resource<LocationTourDto>> getAll() {
+		return locationTourService.getAll().stream().map(location -> {
+			Link link = linkTo(methodOn(getClass()).findByID(location.getId())).withSelfRel();
+			return new Resource<LocationTourDto>(location, link);
+		}).collect(Collectors.toList());
 	}
 
 	@PostMapping("/register")
@@ -76,7 +76,9 @@ public class LocationTourController implements SimpleCrudCrontroller<LocationTou
 
 	@GetMapping("/googleMaps")
 	@ApiOperation(value = "Get location tour in Google Maps. Example: Museu do Amanhã, Hopi Hari, Museu do Ipiranga, any String or Zip Code.", tags = "locationsTour")
-	public LocationTourDto findInGoogleMaps(@ApiParam(required = true, example = "Museu do Ipiranga", value = "The place to be looked for.") @RequestParam(name = "address", required = true) String address) throws ElementNotFoundException {
+	public LocationTourDto findInGoogleMaps(
+			@ApiParam(required = true, example = "Museu do Ipiranga", value = "The place to be looked for.") @RequestParam(name = "address", required = true) String address)
+			throws ElementNotFoundException {
 		return locationTourService.findInGoogleMaps(address);
 	}
 
