@@ -24,7 +24,7 @@ public class LocationTourEntity {
 	@SequenceGenerator(name = "location_tour_sequence", sequenceName = "location_tour_sequence")
 	private Long id;
 
-	@Column(name = "name", nullable = false, length = 400)
+	@Column(name = "name", nullable = true, length = 400)
 	private String name;
 
 	@Column(name = "street", nullable = true, length = 400)
@@ -33,19 +33,19 @@ public class LocationTourEntity {
 	@Column(name = "street_number", nullable = true, length = 400)
 	private String streetNumber;
 
-	@Column(name = "province", nullable = false, length = 200)
+	@Column(name = "province", nullable = true, length = 200)
 	private String province;
 
-	@Column(name = "city", nullable = false, length = 200)
+	@Column(name = "city", nullable = true, length = 200)
 	private String city;
 
-	@Column(name = "state", nullable = false, length = 2)
+	@Column(name = "state", nullable = true, length = 2)
 	private String state;
 
 	@Column(name = "state_full_name", nullable = true, length = 200)
 	private String stateFullName;
 
-	@Column(name = "country", nullable = false, length = 200)
+	@Column(name = "country", nullable = true, length = 200)
 	private String country;
 
 	@Column(name = "zip_code", nullable = true, length = 9)

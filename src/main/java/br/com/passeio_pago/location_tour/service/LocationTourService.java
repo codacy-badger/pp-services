@@ -3,7 +3,10 @@ package br.com.passeio_pago.location_tour.service;
 import java.net.URI;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -67,9 +70,28 @@ public class LocationTourService extends SimpleAbstractCrudService<LocationTourD
 			ObjectMapper mapper = new ObjectMapper();
 			JsonNode root = mapper.readTree(response.getBody());
 			JsonNode results = root.path("results");
+			List<String> asList = Arrays.asList("establishment", "park", "point_of_interest");
 			if (results.isArray()) {
 				for (JsonNode item : results) {
 					String formattedAddress = item.get("formatted_address").asText();
+					String removeShortName = "";
+					String removeLongName = "";
+					if(item.get("address_components").isArray()) {
+						for(JsonNode n : item.get("address_components")){
+							if(n.get("types").isArray()) {
+								for(JsonNode type : n.get("types")) {
+									String asText = type.asText();
+									if(asList.contains(asText)) {
+										removeShortName = n.get("short_name").asText();
+										removeLongName = n.get("long_name").asText();
+									}
+								}
+							}
+						}
+					}
+					formattedAddress = StringUtils.remove(formattedAddress, removeShortName+" - ");
+					formattedAddress = StringUtils.remove(formattedAddress, removeLongName+" - ");
+					formattedAddress = formattedAddress.trim();
 					String[] split = formattedAddress.split(" - ");
 					String string = split[split.length - 1];
 					String[] split2 = string.split(", ");

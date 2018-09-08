@@ -2,7 +2,6 @@ package br.com.passeio_pago.location_tour.domain.dto;
 
 import java.io.Serializable;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -18,12 +17,11 @@ public class LocationTourRegistrationDto implements Serializable {
 	 */
 	private static final long serialVersionUID = 6317410428712322622L;
 
-	@ApiModelProperty(required = true, example = "Parque Hopi Hari", value = "Property to define the name of the location where the tour will be.")
-	@NotBlank
+	@ApiModelProperty(required = false, example = "Parque Hopi Hari", value = "Property to define the name of the location where the tour will be.")
 	@Size(max = 400)
 	private String name;
 
-	@ApiModelProperty(required = false, example = "Rodovia dos Bandeirantes, km 72, s/n", value = "Property to define the street of the location.")
+	@ApiModelProperty(required = false, example = "Rodovia dos Bandeirantes, km 72", value = "Property to define the street of the location.")
 	@Size(max = 400)
 	private String street;
 
@@ -31,28 +29,23 @@ public class LocationTourRegistrationDto implements Serializable {
 	@Size(max = 400)
 	private String streetNumber;
 
-	@ApiModelProperty(required = true, example = "Vinhedo", value = "Property to define the province of the location.")
-	@NotBlank
+	@ApiModelProperty(required = false, example = "Vinhedo", value = "Property to define the province of the location.")
 	@Size(max = 200)
 	private String province;
 
-	@ApiModelProperty(required = true, example = "Moinho", value = "Property to define the city of the location.")
-	@NotBlank
+	@ApiModelProperty(required = false, example = "Moinho", value = "Property to define the city of the location.")
 	@Size(max = 200)
 	private String city;
 
-	@ApiModelProperty(required = true, example = "SP", value = "Property to define the state's initials of the location tour.")
-	@NotBlank
+	@ApiModelProperty(required = false, example = "SP", value = "Property to define the state's initials of the location tour.")
 	@Size(min = 2, max = 2)
 	private String state;
 
 	@ApiModelProperty(required = false, example = "São Paulo", value = "Property to define the state's full name of the location tour.")
-	@NotBlank
 	@Size(max = 200)
 	private String stateFullName;
 
-	@ApiModelProperty(required = true, example = "Brazil", value = "Property to define the country of the location tour.")
-	@NotBlank
+	@ApiModelProperty(required = false, example = "Brazil", value = "Property to define the country of the location tour.")
 	@Size(max = 200)
 	private String country;
 
