@@ -1,6 +1,5 @@
 package br.com.passeio_pago.tour.domain.entity;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import javax.persistence.Column;
@@ -29,7 +28,7 @@ public class TourEntity {
 	private String name;
 
 	@Column(name = "price", nullable = false)
-	private BigDecimal price = BigDecimal.valueOf(Double.valueOf("0.0"));
+	private double price;
 
 	@Column(name = "payment_deadline", nullable = true)
 	private LocalDate paymentDeadline;
@@ -63,11 +62,11 @@ public class TourEntity {
 		this.name = name;
 	}
 
-	public BigDecimal getPrice() {
+	public double getPrice() {
 		return price;
 	}
 
-	public void setPrice(BigDecimal price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 

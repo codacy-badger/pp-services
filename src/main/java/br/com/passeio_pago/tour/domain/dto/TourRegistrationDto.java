@@ -1,20 +1,14 @@
 package br.com.passeio_pago.tour.domain.dto;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
-import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import br.com.passeio_pago.common.util.SalaryDeserializer;
-import br.com.passeio_pago.common.util.SalarySerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -31,11 +25,11 @@ public class TourRegistrationDto implements Serializable {
 	@Size(max = 400)
 	private String name;
 
-	@ApiModelProperty(required = true, example = "R$80,50", value = "Property to define the tour's price.")
-	@JsonSerialize(using = SalarySerializer.class)
-	@JsonDeserialize(using = SalaryDeserializer.class)
-	@Digits(fraction = 2, integer = 6)
-	private BigDecimal price;
+	@ApiModelProperty(required = true, example = "80.50", value = "Property to define the tour's price.")
+	// @JsonSerialize(using = SalarySerializer.class)
+	// @JsonDeserialize(using = SalaryDeserializer.class)
+	// @Digits(fraction = 2, integer = 6)
+	private double price;
 
 	@ApiModelProperty(required = false, example = "12/08/2019", value = "Property to define the payment dead line.")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
@@ -66,11 +60,11 @@ public class TourRegistrationDto implements Serializable {
 		this.name = name;
 	}
 
-	public BigDecimal getPrice() {
+	public double getPrice() {
 		return price;
 	}
 
-	public void setPrice(BigDecimal price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 

@@ -1,5 +1,8 @@
 package br.com.passeio_pago.tour.service;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,6 +19,8 @@ import br.com.passeio_pago.tour.domain.entity.TourEntity;
 @Service
 public class TourService extends SimpleAbstractCrudService<TourDto, Long, TourEntity> {
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(TourService.class);
+
 	@Autowired
 	private TourRepository dao;
 
@@ -31,6 +36,7 @@ public class TourService extends SimpleAbstractCrudService<TourDto, Long, TourEn
 	protected TourEntity mapDtoToEntity(TourDto dto) {
 		TourEntity entity = new TourEntity();
 		BeanUtils.copyProperties(dto, entity);
+		LOGGER.info(ToStringBuilder.reflectionToString(entity));
 		LocationTourEntity locationTour = new LocationTourEntity();
 		locationTour.setId(dto.getLocationTourId());
 		entity.setLocationTour(locationTour);

@@ -1,17 +1,10 @@
 package br.com.passeio_pago.tour.domain.dto;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
-import javax.validation.constraints.Digits;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import br.com.passeio_pago.common.util.SalaryDeserializer;
-import br.com.passeio_pago.common.util.SalarySerializer;
 import io.swagger.annotations.ApiModel;
 
 @ApiModel
@@ -26,10 +19,10 @@ public class TourDto implements Serializable {
 
 	private String name;
 
-	@JsonSerialize(using = SalarySerializer.class)
-	@JsonDeserialize(using = SalaryDeserializer.class)
-	@Digits(fraction = 2, integer = 6)
-	private BigDecimal price;
+	// @JsonSerialize(using = SalarySerializer.class)
+	// @JsonDeserialize(using = SalaryDeserializer.class)
+	// @Digits(fraction = 2, integer = 6)
+	private double price;
 
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
 	private LocalDate paymentDeadline;
@@ -60,11 +53,11 @@ public class TourDto implements Serializable {
 		this.name = name;
 	}
 
-	public BigDecimal getPrice() {
+	public double getPrice() {
 		return price;
 	}
 
-	public void setPrice(BigDecimal price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 
