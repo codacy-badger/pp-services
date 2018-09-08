@@ -89,9 +89,11 @@ public class LocationTourService extends SimpleAbstractCrudService<LocationTourD
 							}
 						}
 					}
-					formattedAddress = StringUtils.remove(formattedAddress, removeShortName+" - ");
-					formattedAddress = StringUtils.remove(formattedAddress, removeLongName+" - ");
-					formattedAddress = formattedAddress.trim();
+					if(!StringUtils.isAllBlank(removeLongName, removeShortName)) {
+						formattedAddress = StringUtils.remove(formattedAddress, removeShortName+" - ");
+						formattedAddress = StringUtils.remove(formattedAddress, removeLongName+" - ");
+						formattedAddress = formattedAddress.trim();
+					}
 					String[] split = formattedAddress.split(" - ");
 					String string = split[split.length - 1];
 					String[] split2 = string.split(", ");
