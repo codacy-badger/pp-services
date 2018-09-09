@@ -82,10 +82,17 @@ public class TourController implements SimpleCrudCrontroller<TourDto, Long, Tour
 		return tourService.linkStudentsToTour(tourId, linkStudentsToTourRequestDto);
 	}
 
-	@GetMapping("/allStudents/{tourId}")
+	@GetMapping("/{tourId}/allStudents")
 	@ApiOperation(value = "Get all students enrolled in this tour.", tags = "tours")
 	public List<StudentDto> getAllStudentsByTourId(@PathVariable(name = "tourId") Long tourId) throws BadRequestException, ElementNotFoundException {
 		return tourService.getAllStudentsByTourId(tourId);
 	}
-	
+
+	@GetMapping("/{tourId}/{schoolId}/{studentId}")
+	@ApiOperation(value = "Get a specific student enrolled in this tour.", tags = "tours")
+	public StudentDto getStudentsInThisTour(@PathVariable(name = "tourId") Long tourId, @PathVariable(name = "schoolId") String schoolId, @PathVariable(name = "studentId") String studentId)
+			throws BadRequestException, ElementNotFoundException {
+		return tourService.getSpecificStudentsInThisTour(tourId, schoolId, studentId);
+	}
+
 }

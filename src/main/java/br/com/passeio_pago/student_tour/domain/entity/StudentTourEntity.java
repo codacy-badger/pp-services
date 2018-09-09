@@ -23,6 +23,10 @@ public class StudentTourEntity {
 	@Column(name = "school_id", nullable = false, length = 100)
 	private String schoolId;
 
+	@Id
+	@Column(name = "paid", nullable = false)
+	private Boolean paid = Boolean.FALSE;
+
 	public Long getTourId() {
 		return tourId;
 	}
@@ -45,6 +49,14 @@ public class StudentTourEntity {
 
 	public void setSchoolId(String schoolId) {
 		this.schoolId = schoolId;
+	}
+
+	public Boolean getPaid() {
+		return paid;
+	}
+
+	public void setPaid(Boolean paid) {
+		this.paid = paid;
 	}
 
 }

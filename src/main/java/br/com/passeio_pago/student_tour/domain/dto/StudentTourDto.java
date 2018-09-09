@@ -14,6 +14,7 @@ public class StudentTourDto implements Serializable {
 	private Long tourId;
 	private String schoolId;
 	private String studentId;
+	private Boolean paid;
 
 	public Long getTourId() {
 		return tourId;
@@ -37,6 +38,14 @@ public class StudentTourDto implements Serializable {
 
 	public void setStudentId(String studentId) {
 		this.studentId = studentId;
+	}
+
+	public Boolean getPaid() {
+		return paid;
+	}
+
+	public void setPaid(Boolean paid) {
+		this.paid = paid;
 	}
 
 }

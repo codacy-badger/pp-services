@@ -19,6 +19,7 @@ import br.com.passeio_pago.student.domain.dto.StudentDto;
 import br.com.passeio_pago.student.domain.entity.StudentEntityPK;
 import br.com.passeio_pago.student.service.StudentService;
 import br.com.passeio_pago.student_tour.domain.dto.StudentTourDto;
+import br.com.passeio_pago.student_tour.domain.entity.StudentTourEntityPK;
 import br.com.passeio_pago.student_tour.service.StudentTourService;
 import br.com.passeio_pago.tour.dao.TourRepository;
 import br.com.passeio_pago.tour.domain.dto.LinkStudentsToTourRequestDto;
@@ -87,7 +88,20 @@ public class TourService extends SimpleAbstractCrudService<TourDto, Long, TourEn
 		return studentTourService.getAllStudentsByTourId(tourId).stream().map(item -> {
 			StudentEntityPK id = new StudentEntityPK();
 			id.setRegistrationId(item.getStudentId());
+			id.setSchoolId(item.getSchoolId());
 			return studentService.findByID(id);
 		}).collect(Collectors.toList());
+	}
+
+	public StudentDto getSpecificStudentsInThisTour(Long tourId, String schoolId, String studentId) {
+		StudentTourEntityPK pk = new StudentTourEntityPK();
+		pk.setSchoolId(schoolId);
+		pk.setStudentId(studentId);
+		pk.setTourId(tourId);
+		StudentTourDto findByID = studentTourService.findByID(pk);
+		StudentEntityPK id = new StudentEntityPK();
+		id.setRegistrationId(findByID.getStudentId());
+		id.setSchoolId(findByID.getSchoolId());
+		return studentService.findByID(id);
 	}
 }
