@@ -14,7 +14,7 @@ public class StudentTourDto implements Serializable {
 	private Long tourId;
 	private String schoolId;
 	private String studentId;
-	private Boolean paid;
+	private Boolean paid = Boolean.FALSE;
 
 	public Long getTourId() {
 		return tourId;

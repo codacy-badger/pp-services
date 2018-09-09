@@ -6,6 +6,7 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
@@ -17,6 +18,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.passeio_pago.common.exception.ElementNotFoundException;
 import br.com.passeio_pago.school.domain.dto.School;
+import br.com.passeio_pago.tour.domain.dto.TourDto;
+import br.com.passeio_pago.tour.service.TourService;
 
 @Service
 public class SchoolService {
@@ -26,6 +29,9 @@ public class SchoolService {
 
 	@Autowired
 	private String tcuSchoolRestWebService;
+
+	@Autowired
+	private TourService tourService;
 
 	public School getSchoolsById(Long schoolId) {
 		try {
@@ -62,7 +68,8 @@ public class SchoolService {
 		return queryString;
 	}
 
-	private Map<String, Object> getSchoolUriVariablesToSearch(String nome, String rede, String municipio, String uf, String esferaAdministrativa, int quantidadeDeItens) throws UnsupportedEncodingException {
+	private Map<String, Object> getSchoolUriVariablesToSearch(String nome, String rede, String municipio, String uf, String esferaAdministrativa, int quantidadeDeItens)
+			throws UnsupportedEncodingException {
 		Map<String, Object> uriVariables = new HashMap<String, Object>();
 		if (!StringUtils.isBlank(nome)) {
 			uriVariables.put("nome", URLEncoder.encode(nome.toUpperCase(), StandardCharsets.UTF_8.toString()));
@@ -94,5 +101,9 @@ public class SchoolService {
 		toString = StringUtils.remove(toString, "]");
 		toString = StringUtils.remove(toString, " ");
 		return toString;
+	}
+
+	public List<TourDto> getAllToursBySchoolId(Long schoolId) {
+		return tourService.getAllToursBySchoolId(String.valueOf(schoolId));
 	}
 }

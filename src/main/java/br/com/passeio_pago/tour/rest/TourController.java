@@ -24,7 +24,6 @@ import br.com.passeio_pago.common.controlle.SimpleCrudCrontroller;
 import br.com.passeio_pago.common.exception.BadRequestException;
 import br.com.passeio_pago.common.exception.ElementNotFoundException;
 import br.com.passeio_pago.common.exception.ElementRegistrationException;
-import br.com.passeio_pago.student.domain.dto.StudentDto;
 import br.com.passeio_pago.student_tour.domain.dto.StudentTourDto;
 import br.com.passeio_pago.tour.domain.dto.LinkStudentsToTourRequestDto;
 import br.com.passeio_pago.tour.domain.dto.TourDto;
@@ -84,13 +83,13 @@ public class TourController implements SimpleCrudCrontroller<TourDto, Long, Tour
 
 	@GetMapping("/{tourId}/allStudents")
 	@ApiOperation(value = "Get all students enrolled in this tour.", tags = "tours")
-	public List<StudentDto> getAllStudentsByTourId(@PathVariable(name = "tourId") Long tourId) throws BadRequestException, ElementNotFoundException {
+	public List<StudentTourDto> getAllStudentsByTourId(@PathVariable(name = "tourId") Long tourId) throws BadRequestException, ElementNotFoundException {
 		return tourService.getAllStudentsByTourId(tourId);
 	}
 
 	@GetMapping("/{tourId}/{schoolId}/{studentId}")
 	@ApiOperation(value = "Get a specific student enrolled in this tour.", tags = "tours")
-	public StudentDto getStudentsInThisTour(@PathVariable(name = "tourId") Long tourId, @PathVariable(name = "schoolId") String schoolId, @PathVariable(name = "studentId") String studentId)
+	public StudentTourDto getStudentsInThisTour(@PathVariable(name = "tourId") Long tourId, @PathVariable(name = "schoolId") String schoolId, @PathVariable(name = "studentId") String studentId)
 			throws BadRequestException, ElementNotFoundException {
 		return tourService.getSpecificStudentsInThisTour(tourId, schoolId, studentId);
 	}

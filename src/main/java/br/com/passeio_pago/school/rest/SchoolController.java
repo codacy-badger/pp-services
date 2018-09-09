@@ -1,5 +1,7 @@
 package br.com.passeio_pago.school.rest;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.passeio_pago.school.domain.dto.School;
 import br.com.passeio_pago.school.service.SchoolService;
+import br.com.passeio_pago.tour.domain.dto.TourDto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -40,4 +43,9 @@ public class SchoolController {
 		return ResponseEntity.ok(schools);
 	}
 
+	@ApiOperation(value = "Get all tours in a specific school.", tags = "schools")
+	@GetMapping("/{schoolId}/allTours")
+	public ResponseEntity<List<TourDto>> getAllToursBySchoolId(@PathVariable(name = "schoolId") Long schoolId) {
+		return ResponseEntity.ok(service.getAllToursBySchoolId(schoolId));
+	}
 }

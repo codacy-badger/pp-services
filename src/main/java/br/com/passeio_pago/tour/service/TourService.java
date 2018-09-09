@@ -15,9 +15,6 @@ import org.springframework.stereotype.Service;
 import br.com.passeio_pago.common.exception.ElementRegistrationException;
 import br.com.passeio_pago.common.service.SimpleAbstractCrudService;
 import br.com.passeio_pago.location_tour.domain.entity.LocationTourEntity;
-import br.com.passeio_pago.student.domain.dto.StudentDto;
-import br.com.passeio_pago.student.domain.entity.StudentEntityPK;
-import br.com.passeio_pago.student.service.StudentService;
 import br.com.passeio_pago.student_tour.domain.dto.StudentTourDto;
 import br.com.passeio_pago.student_tour.domain.entity.StudentTourEntityPK;
 import br.com.passeio_pago.student_tour.service.StudentTourService;
@@ -37,9 +34,6 @@ public class TourService extends SimpleAbstractCrudService<TourDto, Long, TourEn
 
 	@Autowired
 	private StudentTourService studentTourService;
-
-	@Autowired
-	private StudentService studentService;
 
 	@Override
 	protected TourDto mapEntityToDto(TourEntity entity) {
@@ -84,24 +78,19 @@ public class TourService extends SimpleAbstractCrudService<TourDto, Long, TourEn
 		return list;
 	}
 
-	public List<StudentDto> getAllStudentsByTourId(Long tourId) {
-		return studentTourService.getAllStudentsByTourId(tourId).stream().map(item -> {
-			StudentEntityPK id = new StudentEntityPK();
-			id.setRegistrationId(item.getStudentId());
-			id.setSchoolId(item.getSchoolId());
-			return studentService.findByID(id);
-		}).collect(Collectors.toList());
+	public List<StudentTourDto> getAllStudentsByTourId(Long tourId) {
+		return studentTourService.getAllStudentsByTourId(tourId);
 	}
 
-	public StudentDto getSpecificStudentsInThisTour(Long tourId, String schoolId, String studentId) {
+	public StudentTourDto getSpecificStudentsInThisTour(Long tourId, String schoolId, String studentId) {
 		StudentTourEntityPK pk = new StudentTourEntityPK();
 		pk.setSchoolId(schoolId);
 		pk.setStudentId(studentId);
 		pk.setTourId(tourId);
-		StudentTourDto findByID = studentTourService.findByID(pk);
-		StudentEntityPK id = new StudentEntityPK();
-		id.setRegistrationId(findByID.getStudentId());
-		id.setSchoolId(findByID.getSchoolId());
-		return studentService.findByID(id);
+		return studentTourService.findByID(pk);
+	}
+
+	public List<TourDto> getAllToursBySchoolId(String schoolId) {
+		return dao.findAllBySchoolId(schoolId).stream().map(item -> mapEntityToDto(item)).collect(Collectors.toList());
 	}
 }
