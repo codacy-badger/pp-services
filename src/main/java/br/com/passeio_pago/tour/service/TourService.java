@@ -1,5 +1,8 @@
 package br.com.passeio_pago.tour.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,7 +14,10 @@ import org.springframework.stereotype.Service;
 import br.com.passeio_pago.common.exception.ElementRegistrationException;
 import br.com.passeio_pago.common.service.SimpleAbstractCrudService;
 import br.com.passeio_pago.location_tour.domain.entity.LocationTourEntity;
+import br.com.passeio_pago.student_tour.domain.dto.StudentTourDto;
+import br.com.passeio_pago.student_tour.service.StudentTourService;
 import br.com.passeio_pago.tour.dao.TourRepository;
+import br.com.passeio_pago.tour.domain.dto.LinkStudentsToTourRequestDto;
 import br.com.passeio_pago.tour.domain.dto.TourDto;
 import br.com.passeio_pago.tour.domain.dto.TourRegistrationDto;
 import br.com.passeio_pago.tour.domain.entity.TourEntity;
@@ -23,6 +29,9 @@ public class TourService extends SimpleAbstractCrudService<TourDto, Long, TourEn
 
 	@Autowired
 	private TourRepository dao;
+
+	@Autowired
+	private StudentTourService studentTourService;
 
 	@Override
 	protected TourDto mapEntityToDto(TourEntity entity) {
@@ -52,5 +61,18 @@ public class TourService extends SimpleAbstractCrudService<TourDto, Long, TourEn
 		TourDto dto = new TourDto();
 		BeanUtils.copyProperties(registerDto, dto);
 		return register(dto);
+	}
+
+	public List<StudentTourDto> linkStudentsToTour(Long tourId, LinkStudentsToTourRequestDto[] linkStudentsToTourRequestDto) {
+		List<StudentTourDto> list = new ArrayList<StudentTourDto>();
+		for (LinkStudentsToTourRequestDto item : linkStudentsToTourRequestDto) {
+			StudentTourDto registerDto = new StudentTourDto();
+			registerDto.setSchoolId(item.getSchoolId());
+			registerDto.setStudentId(item.getStudentId());
+			registerDto.setTourId(tourId);
+			StudentTourDto register = studentTourService.register(registerDto);
+			list.add(register);
+		}
+		return list;
 	}
 }

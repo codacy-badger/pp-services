@@ -24,6 +24,8 @@ import br.com.passeio_pago.common.controlle.SimpleCrudCrontroller;
 import br.com.passeio_pago.common.exception.BadRequestException;
 import br.com.passeio_pago.common.exception.ElementNotFoundException;
 import br.com.passeio_pago.common.exception.ElementRegistrationException;
+import br.com.passeio_pago.student_tour.domain.dto.StudentTourDto;
+import br.com.passeio_pago.tour.domain.dto.LinkStudentsToTourRequestDto;
 import br.com.passeio_pago.tour.domain.dto.TourDto;
 import br.com.passeio_pago.tour.domain.dto.TourRegistrationDto;
 import br.com.passeio_pago.tour.service.TourService;
@@ -70,6 +72,13 @@ public class TourController implements SimpleCrudCrontroller<TourDto, Long, Tour
 	@Override
 	public TourDto findByID(@PathVariable(name = "id") Long id) throws BadRequestException, ElementNotFoundException {
 		return tourService.findByID(id);
+	}
+
+	@PostMapping("/linkStudents/{tourId}")
+	@ApiOperation(value = "Link a set of students to the specified tour.", tags = "tours")
+	public List<StudentTourDto> linkStudentsToTour(@PathVariable(name = "tourId") Long tourId, @RequestBody LinkStudentsToTourRequestDto[] linkStudentsToTourRequestDto)
+			throws BadRequestException, ElementNotFoundException {
+		return tourService.linkStudentsToTour(tourId, linkStudentsToTourRequestDto);
 	}
 
 }
