@@ -54,6 +54,9 @@ public class LocationTourEntity {
 	@Column(name = "phone_number", nullable = true, length = 30)
 	private String phoneNumber;
 
+	@Column(name = "image_url", nullable = true, length = 400)
+	private String imageUrl;
+
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "locationTour")
 	private List<TourEntity> tours;
 
@@ -151,6 +154,14 @@ public class LocationTourEntity {
 
 	public void setCountry(String country) {
 		this.country = country;
+	}
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
 	}
 
 }

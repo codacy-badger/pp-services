@@ -58,6 +58,10 @@ public class LocationTourRegistrationDto implements Serializable {
 	@Size(max = 30)
 	private String phoneNumber;
 
+	@ApiModelProperty(required = false, example = "https://s2.glbimg.com/coEnvmBwrn4w3O_P13I1pS_wlhU=/540x304/top/smart/https://i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2017/p/N/LN99cdQVehOwnejJEgow/hopihari03.jpg", value = "Property to define a link to an image of the place.")
+	@Size(max = 400)
+	private String imageUrl;
+
 	public String getName() {
 		return name;
 	}
@@ -136,6 +140,14 @@ public class LocationTourRegistrationDto implements Serializable {
 
 	public void setCountry(String country) {
 		this.country = country;
+	}
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
 	}
 
 }

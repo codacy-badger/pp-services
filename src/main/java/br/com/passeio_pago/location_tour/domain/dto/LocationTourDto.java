@@ -26,6 +26,7 @@ public class LocationTourDto implements Serializable {
 	private String zipCode;
 	@Pattern(regexp = CommonPatterns.PHONE_NUMBER_PATTERN)
 	private String phoneNumber;
+	private String imageUrl;
 
 	public LocationTourDto() {
 		super();
@@ -117,6 +118,14 @@ public class LocationTourDto implements Serializable {
 
 	public void setCountry(String country) {
 		this.country = country;
+	}
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
 	}
 
 }
