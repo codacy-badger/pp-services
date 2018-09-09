@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.passeio_pago.common.controlle.SimpleCrudCrontroller;
@@ -97,5 +98,17 @@ public class StudentController implements SimpleCrudCrontroller<StudentDto, Stud
 		id.setRegistrationId(registrationId);
 		id.setSchoolId(schoolId);
 		return findByID(id);
+	}
+	
+	@GetMapping("/{schoolId}")
+	@ApiOperation(value = "Find student by some OPTIONALS parameters.", tags = "students")
+	public List<StudentDto> findStudentByParameters(
+			@PathVariable("schoolId") String schoolId,
+			@RequestParam(name="registrationId", required = false) String registrationId,
+			@RequestParam(name="firstName", required = false) String firstName,
+			@RequestParam(name="lastName", required = false) String lastName,
+			@RequestParam(name="schoolGrade", required = false) String schoolGrade,
+			@RequestParam(name="classIdentifier", required = false) String classIdentifier) throws BadRequestException, ElementNotFoundException {
+		return studentService.findStudentsWithSchoolIdAndParameter(schoolId, registrationId, firstName, lastName, schoolGrade, classIdentifier);
 	}
 }
