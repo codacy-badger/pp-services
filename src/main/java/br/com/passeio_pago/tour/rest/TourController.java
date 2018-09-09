@@ -24,6 +24,7 @@ import br.com.passeio_pago.common.controlle.SimpleCrudCrontroller;
 import br.com.passeio_pago.common.exception.BadRequestException;
 import br.com.passeio_pago.common.exception.ElementNotFoundException;
 import br.com.passeio_pago.common.exception.ElementRegistrationException;
+import br.com.passeio_pago.student.domain.dto.StudentDto;
 import br.com.passeio_pago.student_tour.domain.dto.StudentTourDto;
 import br.com.passeio_pago.tour.domain.dto.LinkStudentsToTourRequestDto;
 import br.com.passeio_pago.tour.domain.dto.TourDto;
@@ -81,4 +82,10 @@ public class TourController implements SimpleCrudCrontroller<TourDto, Long, Tour
 		return tourService.linkStudentsToTour(tourId, linkStudentsToTourRequestDto);
 	}
 
+	@GetMapping("/allStudents/{tourId}")
+	@ApiOperation(value = "Get all students enrolled in this tour.", tags = "tours")
+	public List<StudentDto> getAllStudentsByTourId(@PathVariable(name = "tourId") Long tourId) throws BadRequestException, ElementNotFoundException {
+		return tourService.getAllStudentsByTourId(tourId);
+	}
+	
 }

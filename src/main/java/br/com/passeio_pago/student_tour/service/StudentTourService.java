@@ -1,5 +1,8 @@
 package br.com.passeio_pago.student_tour.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -34,6 +37,10 @@ public class StudentTourService extends SimpleAbstractCrudService<StudentTourDto
 	@Override
 	protected JpaRepository<StudentTourEntity, StudentTourEntityPK> getDao() {
 		return dao;
+	}
+
+	public List<StudentTourDto> getAllStudentsByTourId(Long tourId) {
+		return dao.findAllByTourId(tourId).stream().map(entity -> mapEntityToDto(entity)).collect(Collectors.toList());
 	}
 
 }

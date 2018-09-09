@@ -2,6 +2,7 @@ package br.com.passeio_pago.tour.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.slf4j.Logger;
@@ -14,6 +15,9 @@ import org.springframework.stereotype.Service;
 import br.com.passeio_pago.common.exception.ElementRegistrationException;
 import br.com.passeio_pago.common.service.SimpleAbstractCrudService;
 import br.com.passeio_pago.location_tour.domain.entity.LocationTourEntity;
+import br.com.passeio_pago.student.domain.dto.StudentDto;
+import br.com.passeio_pago.student.domain.entity.StudentEntityPK;
+import br.com.passeio_pago.student.service.StudentService;
 import br.com.passeio_pago.student_tour.domain.dto.StudentTourDto;
 import br.com.passeio_pago.student_tour.service.StudentTourService;
 import br.com.passeio_pago.tour.dao.TourRepository;
@@ -32,6 +36,9 @@ public class TourService extends SimpleAbstractCrudService<TourDto, Long, TourEn
 
 	@Autowired
 	private StudentTourService studentTourService;
+
+	@Autowired
+	private StudentService studentService;
 
 	@Override
 	protected TourDto mapEntityToDto(TourEntity entity) {
@@ -74,5 +81,13 @@ public class TourService extends SimpleAbstractCrudService<TourDto, Long, TourEn
 			list.add(register);
 		}
 		return list;
+	}
+
+	public List<StudentDto> getAllStudentsByTourId(Long tourId) {
+		return studentTourService.getAllStudentsByTourId(tourId).stream().map(item -> {
+			StudentEntityPK id = new StudentEntityPK();
+			id.setRegistrationId(item.getStudentId());
+			return studentService.findByID(id);
+		}).collect(Collectors.toList());
 	}
 }
