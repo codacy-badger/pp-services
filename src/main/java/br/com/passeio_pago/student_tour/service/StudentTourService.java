@@ -43,4 +43,13 @@ public class StudentTourService extends SimpleAbstractCrudService<StudentTourDto
 		return dao.findAllByTourId(tourId).stream().map(entity -> mapEntityToDto(entity)).collect(Collectors.toList());
 	}
 
+	public StudentTourDto payTour(Long tourId, String studentId, String schoolId) {
+		StudentTourEntity entity = new StudentTourEntity();
+		entity.setPaid(Boolean.TRUE);
+		entity.setSchoolId(schoolId);
+		entity.setStudentId(studentId);
+		entity.setTourId(tourId);
+		return mapEntityToDto(dao.save(entity));
+	}
+
 }

@@ -40,6 +40,7 @@ public class SpreadsheetService {
 			FileInputStream excelFile = handleMultipartFile(file);
 			Workbook workbook = new XSSFWorkbook(excelFile);
 			Iterator<Sheet> sheetIterator = workbook.sheetIterator();
+			int i = 1;
 			while (sheetIterator.hasNext()) {
 				List<Map<String, Object>> rowsArray = new ArrayList<Map<String, Object>>();
 				Sheet sheet = sheetIterator.next();
@@ -82,7 +83,7 @@ public class SpreadsheetService {
 					}
 					count++;
 				}
-				result.put(String.join("_T_", filename, sheetName), rowsArray);
+				result.put("ARRAY_" + i++, rowsArray);
 			}
 			workbook.close();
 			excelFile.close();
