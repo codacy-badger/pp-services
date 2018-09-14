@@ -11,6 +11,16 @@ public class StudentEntityPK implements Serializable {
 	public String registrationId;
 	public String schoolId;
 
+	public StudentEntityPK() {
+		super();
+	}
+
+	public StudentEntityPK(String registrationId, String schoolId) {
+		super();
+		this.registrationId = registrationId;
+		this.schoolId = schoolId;
+	}
+
 	public String getRegistrationId() {
 		return registrationId;
 	}
