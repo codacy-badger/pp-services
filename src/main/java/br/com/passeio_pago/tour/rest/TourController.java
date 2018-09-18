@@ -3,6 +3,7 @@ package br.com.passeio_pago.tour.rest;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -110,7 +111,7 @@ public class TourController implements SimpleCrudCrontroller<TourDto, Long, Tour
 		PaginatedValuesDto<CompleteInfoStudent> result = null;
 		int maxPage = partition.size() - 1;
 		if (maxPage < pageNumber) {
-			result = new PaginatedValuesDto<CompleteInfoStudent>(List.of(), pageNumber, 0, false, maxPage);
+			result = new PaginatedValuesDto<CompleteInfoStudent>(new ArrayList<CompleteInfoStudent>(0), pageNumber, 0, false, maxPage);
 		} else {
 			List<CompleteInfoStudent> list2 = partition.get(pageNumber);
 			result = new PaginatedValuesDto<CompleteInfoStudent>(list2, pageNumber, list2.size(), pageNumber < maxPage, maxPage);
