@@ -12,16 +12,18 @@ public class PaginatedValuesDto<T> implements Serializable {
 	private int pageNum;
 	private int pageSize;
 	private boolean hasMore;
+	private int maxPage;
 
 	public PaginatedValuesDto() {
 		// Intentionally empty.
 	}
 
-	public PaginatedValuesDto(Collection<T> values, int pageNum, int maxResults, boolean hasMore) {
+	public PaginatedValuesDto(Collection<T> values, int pageNum, int maxResults, boolean hasMore, int maxPage) {
 		this.values = values;
 		this.pageNum = pageNum;
 		this.pageSize = maxResults;
 		this.hasMore = hasMore;
+		this.maxPage = maxPage;
 	}
 
 	public int getPageNum() {
@@ -50,5 +52,13 @@ public class PaginatedValuesDto<T> implements Serializable {
 
 	public Collection<T> getValues() {
 		return values;
+	}
+
+	public int getMaxPage() {
+		return maxPage;
+	}
+
+	public void setMaxPage(int maxPage) {
+		this.maxPage = maxPage;
 	}
 }
