@@ -92,21 +92,14 @@ public class TourController implements SimpleCrudCrontroller<TourDto, Long, Tour
 		return tourService.linkStudentsToTour(tourId, linkStudentsToTourRequestDto);
 	}
 
-	@GetMapping("/{tourId}/allStudents")
-	@ApiOperation(value = "Get all students enrolled in this tour.", tags = "tours")
-	public PaginatedValuesDto<CompleteInfoStudent> getAllStudentsByTourId(@PathVariable(name = "tourId") Long tourId,
+	@GetMapping("/{tourId}/teacherViewAllStudents")
+	@ApiOperation(value = "Get all students enrolled in this tour. Teacher view!", tags = "tours")
+	public PaginatedValuesDto<CompleteInfoStudent> teacherViewAllStudents(@PathVariable(name = "tourId") Long tourId,
 			@ApiParam(required = true, example = "0", defaultValue = "0", allowableValues = "range[0, infinity]", allowEmptyValue = false, allowMultiple = false, value = "Zero based value to specify a page number. Must be equals or greater than 0.") @Min(0) @RequestParam(defaultValue = "0") int pageNumber,
-			@ApiParam(required = true, example = "10", defaultValue = "10", allowableValues = "range[1, infinity]", allowEmptyValue = false, allowMultiple = false, value = "The size of each page. Must be greater than 1.") @Min(1) @RequestParam(defaultValue = "10") int pageSize) throws BadRequestException, ElementNotFoundException {
+			@ApiParam(required = true, example = "10", defaultValue = "10", allowableValues = "range[1, infinity]", allowEmptyValue = false, allowMultiple = false, value = "The size of each page. Must be greater than 0.") @Min(1) @RequestParam(defaultValue = "10") int pageSize)
+			throws BadRequestException, ElementNotFoundException {
 		MorePreconditions.checkPagination(pageSize, pageNumber);
-		List<CompleteInfoStudent> list = tourService.getAllStudentsByTourId(tourId);
-		list.sort(new Comparator<CompleteInfoStudent>() {
-			@Override
-			public int compare(CompleteInfoStudent o1, CompleteInfoStudent o2) {
-				String o1FullName = o1.getFirstName()+o1.getLastName();
-				String o2FullName = o2.getFirstName()+o2.getLastName();
-				return o1FullName.compareToIgnoreCase(o2FullName);
-			}
-		});
+		List<CompleteInfoStudent> list = getAllStudentsByTourId(tourId);
 		List<List<CompleteInfoStudent>> partition = Lists.partition(list, pageSize);
 		PaginatedValuesDto<CompleteInfoStudent> result = null;
 		int maxPage = partition.size() - 1;
@@ -117,6 +110,21 @@ public class TourController implements SimpleCrudCrontroller<TourDto, Long, Tour
 			result = new PaginatedValuesDto<CompleteInfoStudent>(list2, pageNumber, list2.size(), pageNumber < maxPage, maxPage);
 		}
 		return result;
+	}
+
+	@GetMapping("/{tourId}/allStudents")
+	@ApiOperation(value = "Get all students enrolled in this tour.", tags = "tours")
+	public List<CompleteInfoStudent> getAllStudentsByTourId(@PathVariable(name = "tourId") Long tourId) throws BadRequestException, ElementNotFoundException {
+		List<CompleteInfoStudent> list = tourService.getAllStudentsByTourId(tourId);
+		list.sort(new Comparator<CompleteInfoStudent>() {
+			@Override
+			public int compare(CompleteInfoStudent o1, CompleteInfoStudent o2) {
+				String o1FullName = o1.getFirstName() + o1.getLastName();
+				String o2FullName = o2.getFirstName() + o2.getLastName();
+				return o1FullName.compareToIgnoreCase(o2FullName);
+			}
+		});
+		return list;
 	}
 
 	@GetMapping("/{tourId}/{schoolId}/{studentId}")
