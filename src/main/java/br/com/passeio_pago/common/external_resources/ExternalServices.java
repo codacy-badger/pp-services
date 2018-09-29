@@ -8,6 +8,11 @@ import org.springframework.context.annotation.Configuration;
 public class ExternalServices {
 
 	@Bean
+	public String goQrCodeWebService() {
+		return "https://api.qrserver.com/v1/create-qr-code/";
+	}
+	
+	@Bean
 	public String tcuWebServiceHost() {
 		return "http://mobile-aceite.tcu.gov.br:80/";
 	}
